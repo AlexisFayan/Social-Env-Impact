@@ -1,23 +1,36 @@
-# Social & Environmental Impact — E-commerce Transparency
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Problème
+## Getting Started
 
-Aujourd'hui, quand on achète sur un site d'e-commerce, la chaîne d'approvisionnement des produits est largement opaque : origine des matières, lieux de fabrication, transport, conditions de travail, etc. Tout cela reste invisible pour le consommateur.
+First, run the development server:
 
-Les informations environnementales et éthiques sont soit absentes, soit éparpillées et difficiles à comprendre au moment de l'achat. Ce qui fait que même des consommateurs qui veulent consommer plus responsable prennent leurs décisions principalement sur le prix et la livraison, faute d'outils simples pour intégrer l'impact réel de leurs achats dans leurs choix.
-
-## Pour qui ?
-
-- Les consommateurs qui achètent sur des sites d'e-commerce et qui souhaitent aligner leurs achats avec leurs valeurs environnementales et sociales
-- Les utilisateurs soucieux de l'impact de leur consommation
-
-## Projet
-
-Mini-projet académique — Epitech (Social & Environmental Impact Assessment)
-
-## Structure
-
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
-docs/           → Documentation, diagrammes, analyses
-src/            → Code source (si applicable)
-```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
