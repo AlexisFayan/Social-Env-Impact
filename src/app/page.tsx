@@ -300,30 +300,30 @@ export default function Home() {
       {/* ── Problème / Solution ── */}
       <section className="py-20 px-6">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-extrabold tracking-tight text-center mb-4">Le Problème &amp; La Solution</h2>
-          <p className="text-gray-600 text-center mb-12">Rendre visible l&apos;invisible de la supply chain</p>
+          <h2 className="text-3xl font-extrabold tracking-tight text-center mb-4 text-gray-950">Le Problème &amp; La Solution</h2>
+          <p className="text-gray-500 text-center mb-12">Rendre visible l&apos;invisible de la supply chain</p>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="rounded-2xl border border-gray-200 bg-gray-50 p-8">
-              <h3 className="font-bold text-lg mb-3 flex items-center gap-2">
-                <Search className="w-5 h-5 text-gray-700" />
+              <h3 className="font-bold text-lg mb-3 flex items-center gap-2 text-gray-950">
+                <Search className="w-5 h-5 text-gray-800" />
                 Le problème
               </h3>
-              <p className="text-gray-700 text-sm leading-relaxed mb-3">
+              <p className="text-gray-800 text-sm leading-relaxed mb-3">
                 La chaîne d&apos;approvisionnement des produits e-commerce est largement opaque : origine des matières, lieux de fabrication, transport, conditions de travail… tout reste invisible pour le consommateur.
               </p>
-              <p className="text-gray-700 text-sm leading-relaxed">
+              <p className="text-gray-800 text-sm leading-relaxed">
                 Même les consommateurs soucieux de l&apos;environnement finissent par décider sur le prix et la livraison, faute d&apos;outils simples.
               </p>
             </div>
             <div className="rounded-2xl border border-gray-200 bg-gray-50 p-8">
-              <h3 className="font-bold text-lg mb-3 flex items-center gap-2">
-                <Lightbulb className="w-5 h-5 text-gray-700" />
+              <h3 className="font-bold text-lg mb-3 flex items-center gap-2 text-gray-950">
+                <Lightbulb className="w-5 h-5 text-gray-800" />
                 La solution
               </h3>
-              <p className="text-gray-700 text-sm leading-relaxed mb-3">
+              <p className="text-gray-800 text-sm leading-relaxed mb-3">
                 Une <strong>extension navigateur</strong> qui analyse les fiches produits et affiche directement sur la page :
               </p>
-              <ul className="space-y-2 text-sm text-gray-700">
+              <ul className="space-y-2 text-sm text-gray-800">
                 <li className="flex items-start gap-2"><ArrowRight className="w-4 h-4 text-green-600 mt-0.5 shrink-0" /> Estimation de l&apos;impact environnemental (empreinte carbone, labels)</li>
                 <li className="flex items-start gap-2"><ArrowRight className="w-4 h-4 text-green-600 mt-0.5 shrink-0" /> Indicateurs éthiques (pays de production, labels sociaux, controverses)</li>
                 <li className="flex items-start gap-2"><ArrowRight className="w-4 h-4 text-green-600 mt-0.5 shrink-0" /> Recommandations d&apos;alternatives plus responsables</li>
@@ -336,7 +336,7 @@ export default function Home() {
       {/* ── Cycle de Vie (Cercle) ── */}
       <section className="py-20 px-6 bg-gray-50">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-extrabold tracking-tight text-center mb-4">Cycle de Vie du Produit</h2>
+          <h2 className="text-3xl font-extrabold tracking-tight text-center mb-4 text-gray-950">Cycle de Vie du Produit</h2>
           <p className="text-gray-600 text-center mb-12">8 étapes circulaires — de l&apos;extraction à la fin de vie et retour matière</p>
           <CircleDiagram />
           <div className="flex justify-center mt-8">
@@ -351,7 +351,7 @@ export default function Home() {
       {/* ── Ramifications ── */}
       <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-extrabold tracking-tight text-center mb-4">Ramifications par étape</h2>
+          <h2 className="text-3xl font-extrabold tracking-tight text-center mb-4 text-gray-950">Ramifications par étape</h2>
           <p className="text-gray-600 text-center mb-12">Impact environnemental, social et économique — cliquez pour développer</p>
           <div className="space-y-4">
             {ramifications.map((ram) => (
@@ -387,7 +387,7 @@ export default function Home() {
       {/* ── Solution Cards ── */}
       <section className="py-20 px-6 bg-gradient-to-br from-green-50 to-white">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-extrabold tracking-tight text-center mb-4">Notre Solution Rend Tout Visible</h2>
+          <h2 className="text-3xl font-extrabold tracking-tight text-center mb-4 text-gray-950">Notre Solution Rend Tout Visible</h2>
           <p className="text-gray-600 text-center mb-12">Ce que l&apos;extension affiche au consommateur au moment de l&apos;achat</p>
           <div className="grid md:grid-cols-3 gap-5">
             {[
