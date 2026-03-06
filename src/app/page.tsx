@@ -10,6 +10,11 @@ import {
   Sparkles,
   ArrowRight,
   Recycle,
+  Search,
+  Lightbulb,
+  BarChart3,
+  Handshake,
+  Zap,
 } from "lucide-react";
 
 /* ═══════════════════════════════════════
@@ -17,14 +22,14 @@ import {
    ═══════════════════════════════════════ */
 
 const steps = [
-  { num: 1, label: "Extraction", sub: "matières premières", emoji: "⛏️", color: "#b45309", angle: -90 },
-  { num: 2, label: "Transformation", sub: "& Fabrication", emoji: "🏭", color: "#c2410c", angle: -45 },
-  { num: 3, label: "Emballage", sub: "& Packaging", emoji: "📦", color: "#0d9488", angle: 0 },
-  { num: 4, label: "Transport", sub: "& Logistique", emoji: "🚢", color: "#2563eb", angle: 45 },
-  { num: 5, label: "Distribution", sub: "& Vente en ligne", emoji: "🛒", color: "#7c3aed", angle: 90 },
-  { num: 6, label: "Livraison", sub: "au consommateur", emoji: "🚚", color: "#db2777", angle: 135 },
-  { num: 7, label: "Utilisation", sub: "par le client", emoji: "👤", color: "#059669", angle: 180 },
-  { num: 8, label: "Fin de vie", sub: "Recyclage / Décharge", emoji: "🗑️", color: "#dc2626", angle: 225 },
+  { num: 1, label: "Extraction", sub: "matières premières", color: "#b45309", angle: -90 },
+  { num: 2, label: "Transformation", sub: "& Fabrication", color: "#c2410c", angle: -45 },
+  { num: 3, label: "Emballage", sub: "& Packaging", color: "#0d9488", angle: 0 },
+  { num: 4, label: "Transport", sub: "& Logistique", color: "#2563eb", angle: 45 },
+  { num: 5, label: "Distribution", sub: "& Vente en ligne", color: "#7c3aed", angle: 90 },
+  { num: 6, label: "Livraison", sub: "au consommateur", color: "#db2777", angle: 135 },
+  { num: 7, label: "Utilisation", sub: "par le client", color: "#059669", angle: 180 },
+  { num: 8, label: "Fin de vie", sub: "Recyclage / Décharge", color: "#dc2626", angle: 225 },
 ];
 
 const ramifications = [
@@ -79,10 +84,10 @@ const ramifications = [
 ];
 
 const systemicEffects = [
-  { title: "Extraction → Santé publique", steps: ["⛏️ Extraction minière", "Pollution des eaux", "Santé des communautés", "Coûts santé publique"] },
-  { title: "Extraction → Pauvreté", steps: ["👧 Travail des enfants", "Déscolarisation", "Pauvreté structurelle", "Cycle perpétuel"] },
-  { title: "Fabrication → Climat", steps: ["🏭 Émissions CO₂", "Changement climatique", "Événements extrêmes", "Migrations climatiques"] },
-  { title: "Fin de vie → Alimentation", steps: ["🗑️ Micro-plastiques", "Contamination océans", "Chaîne alimentaire", "Santé humaine"] },
+  { title: "Extraction → Santé publique", steps: ["Extraction minière", "Pollution des eaux", "Santé des communautés", "Coûts santé publique"] },
+  { title: "Extraction → Pauvreté", steps: ["Travail des enfants", "Déscolarisation", "Pauvreté structurelle", "Cycle perpétuel"] },
+  { title: "Fabrication → Climat", steps: ["Émissions CO₂", "Changement climatique", "Événements extrêmes", "Migrations climatiques"] },
+  { title: "Fin de vie → Alimentation", steps: ["Micro-plastiques", "Contamination océans", "Chaîne alimentaire", "Santé humaine"] },
 ];
 
 /* ═══════════════════════════════════════
@@ -140,22 +145,20 @@ function CircleDiagram() {
 
         {/* Center */}
         <circle cx={cx} cy={cy} r={62} fill="white" stroke="#e5e7eb" strokeWidth="1.5" />
-        <text x={cx} y={cy - 10} textAnchor="middle" fontSize="22">♻️</text>
-        <text x={cx} y={cy + 10} textAnchor="middle" fontFamily="var(--font-sans)" fontWeight="700" fontSize="11" fill="#111827">Cycle de Vie</text>
-        <text x={cx} y={cy + 24} textAnchor="middle" fontFamily="var(--font-sans)" fontWeight="400" fontSize="9" fill="#9ca3af">Économie circulaire</text>
+        <text x={cx} y={cy - 4} textAnchor="middle" fontWeight="700" fontSize="12" fill="#111827">Cycle de Vie</text>
+        <text x={cx} y={cy + 12} textAnchor="middle" fontWeight="400" fontSize="9.5" fill="#6b7280">Économie circulaire</text>
 
         {/* Nodes */}
         {positions.map((pos, i) => {
           const s = steps[i];
-          const w = 120, h = 56;
+          const w = 120, h = 52;
           return (
             <g key={i}>
               <rect x={pos.x - w / 2} y={pos.y - h / 2} width={w} height={h} rx={14} fill={s.color} filter="drop-shadow(0 2px 4px rgba(0,0,0,0.15))" />
-              <text x={pos.x - w / 2 + 12} y={pos.y + 2} fontSize="18" dominantBaseline="central">{s.emoji}</text>
-              <circle cx={pos.x + w / 2 - 14} cy={pos.y - h / 2 + 14} r={9} fill="rgba(255,255,255,0.2)" />
-              <text x={pos.x + w / 2 - 14} y={pos.y - h / 2 + 15} textAnchor="middle" dominantBaseline="central" fontWeight="800" fontSize="9" fill="white">{s.num}</text>
-              <text x={pos.x + 6} y={pos.y - 4} textAnchor="middle" fontWeight="600" fontSize="10.5" fill="white">{s.label}</text>
-              <text x={pos.x + 6} y={pos.y + 10} textAnchor="middle" fontWeight="400" fontSize="8.5" fill="rgba(255,255,255,0.7)">{s.sub}</text>
+              <circle cx={pos.x - w / 2 + 16} cy={pos.y} r={10} fill="rgba(255,255,255,0.2)" />
+              <text x={pos.x - w / 2 + 16} y={pos.y + 1} textAnchor="middle" dominantBaseline="central" fontWeight="800" fontSize="10" fill="white">{s.num}</text>
+              <text x={pos.x + 10} y={pos.y - 5} textAnchor="middle" fontWeight="600" fontSize="10.5" fill="white">{s.label}</text>
+              <text x={pos.x + 10} y={pos.y + 9} textAnchor="middle" fontWeight="400" fontSize="8.5" fill="rgba(255,255,255,0.75)">{s.sub}</text>
             </g>
           );
         })}
@@ -191,7 +194,7 @@ function RamCard({ ram }: { ram: typeof ramifications[0] }) {
                   <span className="text-[11px] font-bold uppercase tracking-wide text-green-700">Environnemental</span>
                 </div>
                 <p className="text-sm text-gray-700 leading-relaxed">{ram.env.text}</p>
-                <p className="text-xs text-gray-400 mt-2 italic">{ram.env.ex}</p>
+                <p className="text-xs text-gray-500 mt-2 italic">{ram.env.ex}</p>
               </div>
               <div className="rounded-xl border border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50 p-4">
                 <div className="flex items-center gap-1.5 mb-2">
@@ -199,7 +202,7 @@ function RamCard({ ram }: { ram: typeof ramifications[0] }) {
                   <span className="text-[11px] font-bold uppercase tracking-wide text-blue-700">Social</span>
                 </div>
                 <p className="text-sm text-gray-700 leading-relaxed">{ram.social.text}</p>
-                <p className="text-xs text-gray-400 mt-2 italic">{ram.social.ex}</p>
+                <p className="text-xs text-gray-500 mt-2 italic">{ram.social.ex}</p>
               </div>
               <div className="rounded-xl border border-amber-200 bg-gradient-to-br from-amber-50 to-yellow-50 p-4">
                 <div className="flex items-center gap-1.5 mb-2">
@@ -207,7 +210,7 @@ function RamCard({ ram }: { ram: typeof ramifications[0] }) {
                   <span className="text-[11px] font-bold uppercase tracking-wide text-amber-700">Économique</span>
                 </div>
                 <p className="text-sm text-gray-700 leading-relaxed">{ram.eco.text}</p>
-                <p className="text-xs text-gray-400 mt-2 italic">{ram.eco.ex}</p>
+                <p className="text-xs text-gray-500 mt-2 italic">{ram.eco.ex}</p>
               </div>
             </div>
           </motion.div>
@@ -239,9 +242,9 @@ export default function Home() {
             <br />
             <span className="bg-gradient-to-r from-green-400 to-teal-400 bg-clip-text text-transparent">&amp; Ramifications</span>
             <br />
-            <span className="text-white/30">du E-commerce</span>
+            <span className="text-white/40">du E-commerce</span>
           </h1>
-          <p className="text-lg text-white/60 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-white/75 max-w-2xl mx-auto leading-relaxed">
             Analyse systémique de la chaîne d&apos;approvisionnement — impacts environnementaux, sociaux et économiques à chaque étape du cycle de vie d&apos;un produit.
           </p>
         </div>
@@ -251,26 +254,32 @@ export default function Home() {
       <section className="py-20 px-6">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl font-extrabold tracking-tight text-center mb-4">Le Problème &amp; La Solution</h2>
-          <p className="text-gray-500 text-center mb-12">Rendre visible l&apos;invisible de la supply chain</p>
+          <p className="text-gray-600 text-center mb-12">Rendre visible l&apos;invisible de la supply chain</p>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="rounded-2xl border border-gray-200 bg-gray-50 p-8">
-              <h3 className="font-bold text-lg mb-3 flex items-center gap-2">🔍 Le problème</h3>
-              <p className="text-gray-600 text-sm leading-relaxed mb-3">
+              <h3 className="font-bold text-lg mb-3 flex items-center gap-2">
+                <Search className="w-5 h-5 text-gray-700" />
+                Le problème
+              </h3>
+              <p className="text-gray-700 text-sm leading-relaxed mb-3">
                 La chaîne d&apos;approvisionnement des produits e-commerce est largement opaque : origine des matières, lieux de fabrication, transport, conditions de travail… tout reste invisible pour le consommateur.
               </p>
-              <p className="text-gray-600 text-sm leading-relaxed">
+              <p className="text-gray-700 text-sm leading-relaxed">
                 Même les consommateurs soucieux de l&apos;environnement finissent par décider sur le prix et la livraison, faute d&apos;outils simples.
               </p>
             </div>
             <div className="rounded-2xl border border-gray-200 bg-gray-50 p-8">
-              <h3 className="font-bold text-lg mb-3 flex items-center gap-2">💡 La solution</h3>
-              <p className="text-gray-600 text-sm leading-relaxed mb-3">
+              <h3 className="font-bold text-lg mb-3 flex items-center gap-2">
+                <Lightbulb className="w-5 h-5 text-gray-700" />
+                La solution
+              </h3>
+              <p className="text-gray-700 text-sm leading-relaxed mb-3">
                 Une <strong>extension navigateur</strong> qui analyse les fiches produits et affiche directement sur la page :
               </p>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li className="flex items-start gap-2"><ArrowRight className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> Estimation de l&apos;impact environnemental (empreinte carbone, labels)</li>
-                <li className="flex items-start gap-2"><ArrowRight className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> Indicateurs éthiques (pays de production, labels sociaux, controverses)</li>
-                <li className="flex items-start gap-2"><ArrowRight className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> Recommandations d&apos;alternatives plus responsables</li>
+              <ul className="space-y-2 text-sm text-gray-700">
+                <li className="flex items-start gap-2"><ArrowRight className="w-4 h-4 text-green-600 mt-0.5 shrink-0" /> Estimation de l&apos;impact environnemental (empreinte carbone, labels)</li>
+                <li className="flex items-start gap-2"><ArrowRight className="w-4 h-4 text-green-600 mt-0.5 shrink-0" /> Indicateurs éthiques (pays de production, labels sociaux, controverses)</li>
+                <li className="flex items-start gap-2"><ArrowRight className="w-4 h-4 text-green-600 mt-0.5 shrink-0" /> Recommandations d&apos;alternatives plus responsables</li>
               </ul>
             </div>
           </div>
@@ -280,8 +289,8 @@ export default function Home() {
       {/* ── Cycle de Vie (Cercle) ── */}
       <section className="py-20 px-6 bg-gray-50">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-extrabold tracking-tight text-center mb-4">🔄 Cycle de Vie du Produit</h2>
-          <p className="text-gray-500 text-center mb-12">8 étapes circulaires — de l&apos;extraction à la fin de vie et retour matière</p>
+          <h2 className="text-3xl font-extrabold tracking-tight text-center mb-4">Cycle de Vie du Produit</h2>
+          <p className="text-gray-600 text-center mb-12">8 étapes circulaires — de l&apos;extraction à la fin de vie et retour matière</p>
           <CircleDiagram />
           <div className="flex justify-center mt-8">
             <div className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-green-600 to-emerald-500 text-white font-semibold text-sm shadow-lg">
@@ -295,8 +304,8 @@ export default function Home() {
       {/* ── Ramifications ── */}
       <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-extrabold tracking-tight text-center mb-4">🌿 Ramifications par étape</h2>
-          <p className="text-gray-500 text-center mb-12">Impact environnemental, social et économique — cliquez pour développer</p>
+          <h2 className="text-3xl font-extrabold tracking-tight text-center mb-4">Ramifications par étape</h2>
+          <p className="text-gray-600 text-center mb-12">Impact environnemental, social et économique — cliquez pour développer</p>
           <div className="space-y-4">
             {ramifications.map((ram) => (
               <RamCard key={ram.id} ram={ram} />
@@ -308,15 +317,15 @@ export default function Home() {
       {/* ── Effets Systémiques ── */}
       <section className="py-20 px-6 bg-gray-900 text-white">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-extrabold tracking-tight text-center mb-4">🔗 Effets Systémiques Croisés</h2>
-          <p className="text-gray-500 text-center mb-12">Comment les impacts se propagent — approche system thinking</p>
+          <h2 className="text-3xl font-extrabold tracking-tight text-center mb-4">Effets Systémiques Croisés</h2>
+          <p className="text-gray-400 text-center mb-12">Comment les impacts se propagent — approche system thinking</p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {systemicEffects.map((effect, i) => (
               <div key={i} className="rounded-2xl bg-white/5 border border-white/10 p-6 backdrop-blur-sm">
                 <h4 className="text-green-400 font-bold text-sm mb-4">{effect.title}</h4>
                 <div className="space-y-2.5">
                   {effect.steps.map((step, j) => (
-                    <div key={j} className="flex items-center gap-2 text-sm text-white/70">
+                    <div key={j} className="flex items-center gap-2 text-sm text-white/80">
                       {j > 0 && <span className="text-green-500 text-xs">↓</span>}
                       <span>{step}</span>
                     </div>
@@ -331,29 +340,32 @@ export default function Home() {
       {/* ── Solution Cards ── */}
       <section className="py-20 px-6 bg-gradient-to-br from-green-50 to-white">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-extrabold tracking-tight text-center mb-4">📊 Notre Solution Rend Tout Visible</h2>
-          <p className="text-gray-500 text-center mb-12">Ce que l&apos;extension affiche au consommateur au moment de l&apos;achat</p>
+          <h2 className="text-3xl font-extrabold tracking-tight text-center mb-4">Notre Solution Rend Tout Visible</h2>
+          <p className="text-gray-600 text-center mb-12">Ce que l&apos;extension affiche au consommateur au moment de l&apos;achat</p>
           <div className="grid md:grid-cols-3 gap-5">
             {[
-              { emoji: "🌱", title: "Score Environnemental", desc: "Empreinte carbone estimée sur tout le cycle de vie, présence de labels environnementaux, distance parcourue.", bg: "from-green-100 to-green-50" },
-              { emoji: "🤝", title: "Indicateurs Éthiques", desc: "Pays de production, labels sociaux, controverses connues sur la marque, conditions de travail.", bg: "from-blue-100 to-blue-50" },
-              { emoji: "💡", title: "Alternatives Responsables", desc: "Suggestions de produits similaires avec un meilleur score d'impact — pour consommer aligné avec ses valeurs.", bg: "from-amber-100 to-amber-50" },
-            ].map((card, i) => (
-              <div key={i} className="rounded-2xl border border-gray-200 bg-white p-8 text-center hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${card.bg} flex items-center justify-center text-2xl mx-auto mb-4`}>
-                  {card.emoji}
+              { icon: BarChart3, title: "Score Environnemental", desc: "Empreinte carbone estimée sur tout le cycle de vie, présence de labels environnementaux, distance parcourue.", bg: "bg-green-100", iconColor: "text-green-700" },
+              { icon: Handshake, title: "Indicateurs Éthiques", desc: "Pays de production, labels sociaux, controverses connues sur la marque, conditions de travail.", bg: "bg-blue-100", iconColor: "text-blue-700" },
+              { icon: Zap, title: "Alternatives Responsables", desc: "Suggestions de produits similaires avec un meilleur score d'impact — pour consommer aligné avec ses valeurs.", bg: "bg-amber-100", iconColor: "text-amber-700" },
+            ].map((card, i) => {
+              const Icon = card.icon;
+              return (
+                <div key={i} className="rounded-2xl border border-gray-200 bg-white p-8 text-center hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                  <div className={`w-14 h-14 rounded-2xl ${card.bg} flex items-center justify-center mx-auto mb-4`}>
+                    <Icon className={`w-6 h-6 ${card.iconColor}`} />
+                  </div>
+                  <h3 className="font-bold text-gray-900 mb-2">{card.title}</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">{card.desc}</p>
                 </div>
-                <h3 className="font-bold text-gray-900 mb-2">{card.title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{card.desc}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* ── Footer ── */}
       <footer className="py-10 border-t border-gray-100 text-center">
-        <p className="text-sm text-gray-400">Alexis Fayan — Epitech 2026 · Social &amp; Environmental Impact Assessment</p>
+        <p className="text-sm text-gray-500">Alexis Fayan — Epitech 2026 · Social &amp; Environmental Impact Assessment</p>
       </footer>
     </div>
   );
