@@ -95,70 +95,117 @@ const systemicEffects = [
    ═══════════════════════════════════════ */
 
 function CircleDiagram() {
-  const cx = 300, cy = 300, R = 210;
+  const cx = 380, cy = 380, R = 260;
+  const vb = 760;
+  const nodeW = 140, nodeH = 56, nodeR = 16;
 
   const positions = steps.map((s) => {
     const rad = (s.angle * Math.PI) / 180;
     return { x: cx + R * Math.cos(rad), y: cy + R * Math.sin(rad) };
   });
 
-  // Build arrow paths
+  // Curved arrows along the circle between nodes
   const arrows: string[] = [];
   for (let i = 0; i < 8; i++) {
     const from = positions[i];
     const to = positions[(i + 1) % 8];
+    // Shorten start/end to avoid overlapping with node rects
     const dx = to.x - from.x;
     const dy = to.y - from.y;
     const dist = Math.sqrt(dx * dx + dy * dy);
     const nx = dx / dist;
     const ny = dy / dist;
-    const off = 52;
-    const x1 = from.x + nx * off;
-    const y1 = from.y + ny * off;
-    const x2 = to.x - nx * off;
-    const y2 = to.y - ny * off;
+    const gap = 46;
+    const x1 = from.x + nx * gap;
+    const y1 = from.y + ny * gap;
+    const x2 = to.x - nx * gap;
+    const y2 = to.y - ny * gap;
+    // Control point: push outward from center
     const mx = (x1 + x2) / 2;
     const my = (y1 + y2) / 2;
-    const ca = Math.atan2(my - cy, mx - cx);
-    const cd = 25;
-    const qx = mx + cd * Math.cos(ca);
-    const qy = my + cd * Math.sin(ca);
+    const outAngle = Math.atan2(my - cy, mx - cx);
+    const bulge = 30;
+    const qx = mx + bulge * Math.cos(outAngle);
+    const qy = my + bulge * Math.sin(outAngle);
     arrows.push(`M${x1.toFixed(1)},${y1.toFixed(1)} Q${qx.toFixed(1)},${qy.toFixed(1)} ${x2.toFixed(1)},${y2.toFixed(1)}`);
   }
 
   return (
-    <div className="w-full max-w-[640px] mx-auto aspect-square">
-      <svg viewBox="0 0 600 600" className="w-full h-full">
+    <div className="w-full max-w-[720px] mx-auto aspect-square">
+      <svg viewBox={`0 0 ${vb} ${vb}`} className="w-full h-full">
         <defs>
-          <marker id="ah" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-            <polygon points="0 0, 8 3, 0 6" fill="#22c55e" />
+          <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#22c55e" />
           </marker>
+          <filter id="nodeShadow" x="-10%" y="-10%" width="120%" height="130%">
+            <feDropShadow dx="0" dy="3" stdDeviation="4" floodColor="#000" floodOpacity="0.12" />
+          </filter>
         </defs>
 
-        {/* Orbit */}
-        <circle cx={cx} cy={cy} r={R} fill="none" stroke="#d1d5db" strokeWidth="1.5" strokeDasharray="8 5" opacity="0.4" />
+        {/* Orbit ring */}
+        <circle cx={cx} cy={cy} r={R} fill="none" stroke="#d1d5db" strokeWidth="1.5" strokeDasharray="10 6" opacity="0.35" />
 
-        {/* Arrows */}
+        {/* Arrow paths */}
         {arrows.map((d, i) => (
-          <path key={i} d={d} fill="none" stroke="#22c55e" strokeWidth="2" markerEnd="url(#ah)" opacity="0.45" />
+          <path key={`a${i}`} d={d} fill="none" stroke="#22c55e" strokeWidth="2.5" markerEnd="url(#arrowGreen)" opacity="0.5" />
         ))}
 
-        {/* Center */}
-        <circle cx={cx} cy={cy} r={62} fill="white" stroke="#e5e7eb" strokeWidth="1.5" />
-        <text x={cx} y={cy - 4} textAnchor="middle" fontWeight="700" fontSize="12" fill="#111827">Cycle de Vie</text>
-        <text x={cx} y={cy + 12} textAnchor="middle" fontWeight="400" fontSize="9.5" fill="#6b7280">Économie circulaire</text>
+        {/* Center circle */}
+        <circle cx={cx} cy={cy} r={68} fill="white" stroke="#e5e7eb" strokeWidth="1.5" />
+        <text x={cx} y={cy - 10} textAnchor="middle" fontWeight="800" fontSize="28" fill="#111827">&#9851;</text>
+        <text x={cx} y={cy + 10} textAnchor="middle" fontWeight="700" fontSize="13" fill="#111827">Cycle de Vie</text>
+        <text x={cx} y={cy + 26} textAnchor="middle" fontWeight="400" fontSize="10.5" fill="#6b7280">Economie circulaire</text>
 
         {/* Nodes */}
         {positions.map((pos, i) => {
           const s = steps[i];
-          const w = 120, h = 52;
           return (
-            <g key={i}>
-              <rect x={pos.x - w / 2} y={pos.y - h / 2} width={w} height={h} rx={14} fill={s.color} filter="drop-shadow(0 2px 4px rgba(0,0,0,0.15))" />
-              <circle cx={pos.x - w / 2 + 16} cy={pos.y} r={10} fill="rgba(255,255,255,0.2)" />
-              <text x={pos.x - w / 2 + 16} y={pos.y + 1} textAnchor="middle" dominantBaseline="central" fontWeight="800" fontSize="10" fill="white">{s.num}</text>
-              <text x={pos.x + 10} y={pos.y - 5} textAnchor="middle" fontWeight="600" fontSize="10.5" fill="white">{s.label}</text>
-              <text x={pos.x + 10} y={pos.y + 9} textAnchor="middle" fontWeight="400" fontSize="8.5" fill="rgba(255,255,255,0.75)">{s.sub}</text>
+            <g key={`n${i}`} filter="url(#nodeShadow)">
+              <rect
+                x={pos.x - nodeW / 2}
+                y={pos.y - nodeH / 2}
+                width={nodeW}
+                height={nodeH}
+                rx={nodeR}
+                fill={s.color}
+              />
+              {/* Number badge */}
+              <circle cx={pos.x - nodeW / 2 + 20} cy={pos.y} r={12} fill="rgba(255,255,255,0.2)" />
+              <text
+                x={pos.x - nodeW / 2 + 20}
+                y={pos.y}
+                textAnchor="middle"
+                dominantBaseline="central"
+                fontWeight="800"
+                fontSize="12"
+                fill="white"
+              >
+                {s.num}
+              </text>
+              {/* Label */}
+              <text
+                x={pos.x + 12}
+                y={pos.y - 6}
+                textAnchor="middle"
+                dominantBaseline="auto"
+                fontWeight="700"
+                fontSize="12"
+                fill="white"
+              >
+                {s.label}
+              </text>
+              {/* Subtitle */}
+              <text
+                x={pos.x + 12}
+                y={pos.y + 10}
+                textAnchor="middle"
+                dominantBaseline="auto"
+                fontWeight="400"
+                fontSize="9.5"
+                fill="rgba(255,255,255,0.8)"
+              >
+                {s.sub}
+              </text>
             </g>
           );
         })}
