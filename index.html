@@ -139,88 +139,46 @@
             margin: 0 auto;
         }
 
-        /* ── Cycle Visuel ── */
+        /* ── Cycle Visuel (Cercle SVG) ── */
         .cycle-section {
             background: var(--gray-50);
         }
-        .cycle-ring {
+        .cycle-wrapper {
             position: relative;
-            width: 700px;
-            height: 700px;
+            width: 720px;
+            height: 720px;
             margin: 0 auto;
-            max-width: 100%;
         }
-        @media (max-width: 768px) {
-            .cycle-ring {
+        @media (max-width: 780px) {
+            .cycle-wrapper {
                 width: 100%;
                 height: auto;
+                aspect-ratio: 1;
             }
         }
-
-        .cycle-steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 16px;
+        .cycle-svg {
+            width: 100%;
+            height: 100%;
         }
-        .cycle-step {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            padding: 24px;
-            border-radius: 16px;
-            background: white;
-            border: 1px solid var(--gray-200);
-            transition: all 0.3s ease;
+        .cycle-node {
+            cursor: default;
+            transition: transform 0.3s ease;
         }
-        .cycle-step:hover {
-            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
-            transform: translateY(-2px);
-            border-color: var(--green-200);
+        .cycle-node:hover .node-bg {
+            filter: brightness(1.08);
         }
-        .step-number {
-            flex-shrink: 0;
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .cycle-node:hover {
+            transform: scale(1.04);
+        }
+        .cycle-center-text {
+            font-family: 'Inter', sans-serif;
             font-weight: 800;
-            font-size: 16px;
-            color: white;
+            fill: var(--gray-800);
         }
-        .step-content h3 {
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--gray-900);
-            margin-bottom: 4px;
-        }
-        .step-content p {
-            font-size: 13px;
-            color: var(--gray-500);
-            line-height: 1.5;
-        }
-
-        /* Step colors */
-        .step-1 .step-number { background: linear-gradient(135deg, #b45309, #d97706); }
-        .step-2 .step-number { background: linear-gradient(135deg, #c2410c, #ea580c); }
-        .step-3 .step-number { background: linear-gradient(135deg, #0d9488, #14b8a6); }
-        .step-4 .step-number { background: linear-gradient(135deg, #2563eb, #3b82f6); }
-        .step-5 .step-number { background: linear-gradient(135deg, #7c3aed, #8b5cf6); }
-        .step-6 .step-number { background: linear-gradient(135deg, #db2777, #ec4899); }
-        .step-7 .step-number { background: linear-gradient(135deg, #059669, #10b981); }
-        .step-8 .step-number { background: linear-gradient(135deg, #dc2626, #ef4444); }
-
-        /* Circular arrow between steps */
-        .cycle-flow {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px 0;
-        }
-        .cycle-flow .arrow {
-            font-size: 24px;
-            color: var(--green-400);
+        .cycle-center-sub {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            fill: var(--gray-400);
         }
         .cycle-loop-badge {
             display: inline-flex;
@@ -552,66 +510,100 @@
             <p>8 étapes circulaires — de l'extraction à la fin de vie et retour matière</p>
         </div>
 
-        <div class="cycle-steps">
-            <div class="cycle-step step-1">
-                <div class="step-number">1</div>
-                <div class="step-content">
-                    <h3>Extraction des matières premières</h3>
-                    <p>Mines, agriculture, pétrochimie — les ressources naturelles sont prélevées</p>
-                </div>
-            </div>
-            <div class="cycle-step step-2">
-                <div class="step-number">2</div>
-                <div class="step-content">
-                    <h3>Transformation & Fabrication</h3>
-                    <p>Usines, assemblage, contrôle qualité — la matière devient produit</p>
-                </div>
-            </div>
-            <div class="cycle-step step-3">
-                <div class="step-number">3</div>
-                <div class="step-content">
-                    <h3>Emballage & Packaging</h3>
-                    <p>Conditionnement, protection, marketing — souvent du suremballage</p>
-                </div>
-            </div>
-            <div class="cycle-step step-4">
-                <div class="step-number">4</div>
-                <div class="step-content">
-                    <h3>Transport & Logistique</h3>
-                    <p>Cargo, avion, camion — des milliers de km avant votre porte</p>
-                </div>
-            </div>
-            <div class="cycle-step step-5">
-                <div class="step-number">5</div>
-                <div class="step-content">
-                    <h3>Distribution & Vente en ligne</h3>
-                    <p>Entrepôts, data centers, plateformes — l'infrastructure invisible du e-commerce</p>
-                </div>
-            </div>
-            <div class="cycle-step step-6">
-                <div class="step-number">6</div>
-                <div class="step-content">
-                    <h3>Livraison au consommateur</h3>
-                    <p>Le dernier kilomètre — le plus coûteux et polluant proportionnellement</p>
-                </div>
-            </div>
-            <div class="cycle-step step-7">
-                <div class="step-number">7</div>
-                <div class="step-content">
-                    <h3>Utilisation par le client</h3>
-                    <p>Consommation d'énergie, durabilité, obsolescence programmée</p>
-                </div>
-            </div>
-            <div class="cycle-step step-8">
-                <div class="step-number">8</div>
-                <div class="step-content">
-                    <h3>Fin de vie</h3>
-                    <p>Recyclage, décharge ou réemploi — la boucle se ferme (ou pas)</p>
-                </div>
-            </div>
+        <div class="cycle-wrapper">
+            <svg class="cycle-svg" viewBox="0 0 720 720" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <!-- Arrowhead -->
+                    <marker id="arrowG" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                        <polygon points="0 0, 8 3, 0 6" fill="#22c55e"/>
+                    </marker>
+                </defs>
+
+                <!-- Circular arrow path (dashed, clockwise) -->
+                <circle cx="360" cy="360" r="245" fill="none" stroke="#d1d5db" stroke-width="1.5" stroke-dasharray="8 6" opacity="0.5"/>
+
+                <!-- Curved arrows between nodes -->
+                <path d="M 449 138 A 245 245 0 0 1 530 218" fill="none" stroke="#22c55e" stroke-width="2" marker-end="url(#arrowG)" opacity="0.5"/>
+                <path d="M 575 315 A 245 245 0 0 1 575 405" fill="none" stroke="#22c55e" stroke-width="2" marker-end="url(#arrowG)" opacity="0.5"/>
+                <path d="M 530 502 A 245 245 0 0 1 449 582" fill="none" stroke="#22c55e" stroke-width="2" marker-end="url(#arrowG)" opacity="0.5"/>
+                <path d="M 360 605 A 245 245 0 0 1 271 582" fill="none" stroke="#22c55e" stroke-width="2" marker-end="url(#arrowG)" opacity="0.5"/>
+                <path d="M 190 502 A 245 245 0 0 1 145 405" fill="none" stroke="#22c55e" stroke-width="2" marker-end="url(#arrowG)" opacity="0.5"/>
+                <path d="M 145 315 A 245 245 0 0 1 190 218" fill="none" stroke="#22c55e" stroke-width="2" marker-end="url(#arrowG)" opacity="0.5"/>
+                <path d="M 271 138 A 245 245 0 0 1 360 115" fill="none" stroke="#22c55e" stroke-width="2" marker-end="url(#arrowG)" opacity="0.5"/>
+                <path d="M 449 582 A 245 245 0 0 1 271 138" fill="none" stroke="#22c55e" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#arrowG)" opacity="0.25"/>
+
+                <!-- Center -->
+                <circle cx="360" cy="360" r="80" fill="white" stroke="#e5e7eb" stroke-width="1.5"/>
+                <text x="360" y="350" text-anchor="middle" class="cycle-center-text" font-size="15">♻️ Cycle</text>
+                <text x="360" y="372" text-anchor="middle" class="cycle-center-sub" font-size="11">Économie circulaire</text>
+
+                <!-- Node 1 — top (12h) -->
+                <g class="cycle-node" transform="translate(360, 115)">
+                    <rect class="node-bg" x="-70" y="-32" width="140" height="64" rx="14" fill="#b45309"/>
+                    <text x="0" y="-6" text-anchor="middle" fill="white" font-family="Inter" font-weight="800" font-size="13">1</text>
+                    <text x="0" y="12" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-family="Inter" font-weight="500" font-size="10">Extraction</text>
+                    <text x="0" y="24" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-family="Inter" font-weight="400" font-size="9">matières premières</text>
+                </g>
+
+                <!-- Node 2 — top-right (1h30) -->
+                <g class="cycle-node" transform="translate(533, 192)">
+                    <rect class="node-bg" x="-70" y="-32" width="140" height="64" rx="14" fill="#c2410c"/>
+                    <text x="0" y="-6" text-anchor="middle" fill="white" font-family="Inter" font-weight="800" font-size="13">2</text>
+                    <text x="0" y="12" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-family="Inter" font-weight="500" font-size="10">Transformation</text>
+                    <text x="0" y="24" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-family="Inter" font-weight="400" font-size="9">& Fabrication</text>
+                </g>
+
+                <!-- Node 3 — right (3h) -->
+                <g class="cycle-node" transform="translate(605, 360)">
+                    <rect class="node-bg" x="-70" y="-32" width="140" height="64" rx="14" fill="#0d9488"/>
+                    <text x="0" y="-6" text-anchor="middle" fill="white" font-family="Inter" font-weight="800" font-size="13">3</text>
+                    <text x="0" y="12" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-family="Inter" font-weight="500" font-size="10">Emballage</text>
+                    <text x="0" y="24" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-family="Inter" font-weight="400" font-size="9">& Packaging</text>
+                </g>
+
+                <!-- Node 4 — bottom-right (4h30) -->
+                <g class="cycle-node" transform="translate(533, 528)">
+                    <rect class="node-bg" x="-70" y="-32" width="140" height="64" rx="14" fill="#2563eb"/>
+                    <text x="0" y="-6" text-anchor="middle" fill="white" font-family="Inter" font-weight="800" font-size="13">4</text>
+                    <text x="0" y="12" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-family="Inter" font-weight="500" font-size="10">Transport</text>
+                    <text x="0" y="24" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-family="Inter" font-weight="400" font-size="9">& Logistique</text>
+                </g>
+
+                <!-- Node 5 — bottom (6h) -->
+                <g class="cycle-node" transform="translate(360, 605)">
+                    <rect class="node-bg" x="-70" y="-32" width="140" height="64" rx="14" fill="#7c3aed"/>
+                    <text x="0" y="-6" text-anchor="middle" fill="white" font-family="Inter" font-weight="800" font-size="13">5</text>
+                    <text x="0" y="12" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-family="Inter" font-weight="500" font-size="10">Distribution</text>
+                    <text x="0" y="24" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-family="Inter" font-weight="400" font-size="9">& Vente en ligne</text>
+                </g>
+
+                <!-- Node 6 — bottom-left (7h30) -->
+                <g class="cycle-node" transform="translate(187, 528)">
+                    <rect class="node-bg" x="-70" y="-32" width="140" height="64" rx="14" fill="#db2777"/>
+                    <text x="0" y="-6" text-anchor="middle" fill="white" font-family="Inter" font-weight="800" font-size="13">6</text>
+                    <text x="0" y="12" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-family="Inter" font-weight="500" font-size="10">Livraison</text>
+                    <text x="0" y="24" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-family="Inter" font-weight="400" font-size="9">au consommateur</text>
+                </g>
+
+                <!-- Node 7 — left (9h) -->
+                <g class="cycle-node" transform="translate(115, 360)">
+                    <rect class="node-bg" x="-70" y="-32" width="140" height="64" rx="14" fill="#059669"/>
+                    <text x="0" y="-6" text-anchor="middle" fill="white" font-family="Inter" font-weight="800" font-size="13">7</text>
+                    <text x="0" y="12" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-family="Inter" font-weight="500" font-size="10">Utilisation</text>
+                    <text x="0" y="24" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-family="Inter" font-weight="400" font-size="9">par le client</text>
+                </g>
+
+                <!-- Node 8 — top-left (10h30) -->
+                <g class="cycle-node" transform="translate(187, 192)">
+                    <rect class="node-bg" x="-70" y="-32" width="140" height="64" rx="14" fill="#dc2626"/>
+                    <text x="0" y="-6" text-anchor="middle" fill="white" font-family="Inter" font-weight="800" font-size="13">8</text>
+                    <text x="0" y="12" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-family="Inter" font-weight="500" font-size="10">Fin de vie</text>
+                    <text x="0" y="24" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-family="Inter" font-weight="400" font-size="9">Recyclage / Décharge</text>
+                </g>
+            </svg>
         </div>
 
-        <div style="text-align: center; margin-top: 32px;">
+        <div style="text-align: center; margin-top: 16px;">
             <div class="cycle-loop-badge">♻️ Retour matière → Économie circulaire → Retour étape 1</div>
         </div>
     </div>
