@@ -84,7 +84,7 @@ const ramifications = [
 ];
 
 const systemicEffects = [
-  { title: "Extraction → Santé publique", steps: ["Extraction minière", "Pollution des eaux", "Santé des communautés", "Coûts santé publique"] },
+  { title: "Extraction → Santé", steps: ["Extraction minière", "Pollution des eaux", "Santé des communautés", "Coûts de santé"] },
   { title: "Extraction → Pauvreté", steps: ["Travail des enfants", "Déscolarisation", "Pauvreté structurelle", "Cycle perpétuel"] },
   { title: "Fabrication → Climat", steps: ["Émissions CO₂", "Changement climatique", "Événements extrêmes", "Migrations climatiques"] },
   { title: "Fin de vie → Alimentation", steps: ["Micro-plastiques", "Contamination océans", "Chaîne alimentaire", "Santé humaine"] },
@@ -154,7 +154,7 @@ function CircleDiagram() {
         <circle cx={cx} cy={cy} r={68} fill="white" stroke="#e5e7eb" strokeWidth="1.5" />
         <text x={cx} y={cy - 10} textAnchor="middle" fontWeight="800" fontSize="28" fill="#111827">&#9851;</text>
         <text x={cx} y={cy + 10} textAnchor="middle" fontWeight="700" fontSize="13" fill="#111827">Cycle de Vie</text>
-        <text x={cx} y={cy + 26} textAnchor="middle" fontWeight="400" fontSize="10.5" fill="#6b7280">Economie circulaire</text>
+        <text x={cx} y={cy + 26} textAnchor="middle" fontWeight="500" fontSize="10.5" fill="#4b5563">Economie circulaire</text>
 
         {/* Nodes */}
         {positions.map((pos, i) => {
@@ -202,7 +202,7 @@ function CircleDiagram() {
                 dominantBaseline="auto"
                 fontWeight="400"
                 fontSize="9.5"
-                fill="rgba(255,255,255,0.8)"
+                fill="rgba(255,255,255,0.92)"
               >
                 {s.sub}
               </text>
@@ -241,7 +241,7 @@ function RamCard({ ram }: { ram: typeof ramifications[0] }) {
                   <span className="text-[11px] font-bold uppercase tracking-wide text-green-700">Environnemental</span>
                 </div>
                 <p className="text-sm text-gray-700 leading-relaxed">{ram.env.text}</p>
-                <p className="text-xs text-gray-500 mt-2 italic">{ram.env.ex}</p>
+                <p className="text-xs text-gray-600 mt-2 italic">{ram.env.ex}</p>
               </div>
               <div className="rounded-xl border border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50 p-4">
                 <div className="flex items-center gap-1.5 mb-2">
@@ -249,7 +249,7 @@ function RamCard({ ram }: { ram: typeof ramifications[0] }) {
                   <span className="text-[11px] font-bold uppercase tracking-wide text-blue-700">Social</span>
                 </div>
                 <p className="text-sm text-gray-700 leading-relaxed">{ram.social.text}</p>
-                <p className="text-xs text-gray-500 mt-2 italic">{ram.social.ex}</p>
+                <p className="text-xs text-gray-600 mt-2 italic">{ram.social.ex}</p>
               </div>
               <div className="rounded-xl border border-amber-200 bg-gradient-to-br from-amber-50 to-yellow-50 p-4">
                 <div className="flex items-center gap-1.5 mb-2">
@@ -257,7 +257,7 @@ function RamCard({ ram }: { ram: typeof ramifications[0] }) {
                   <span className="text-[11px] font-bold uppercase tracking-wide text-amber-700">Économique</span>
                 </div>
                 <p className="text-sm text-gray-700 leading-relaxed">{ram.eco.text}</p>
-                <p className="text-xs text-gray-500 mt-2 italic">{ram.eco.ex}</p>
+                <p className="text-xs text-gray-600 mt-2 italic">{ram.eco.ex}</p>
               </div>
             </div>
           </motion.div>
@@ -289,9 +289,9 @@ export default function Home() {
             <br />
             <span className="bg-gradient-to-r from-green-400 to-teal-400 bg-clip-text text-transparent">&amp; Ramifications</span>
             <br />
-            <span className="text-white/40">du E-commerce</span>
+            <span className="text-white/70">du E-commerce</span>
           </h1>
-          <p className="text-lg text-white/75 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-white/90 max-w-2xl mx-auto leading-relaxed">
             Analyse systémique de la chaîne d&apos;approvisionnement — impacts environnementaux, sociaux et économiques à chaque étape du cycle de vie d&apos;un produit.
           </p>
         </div>
@@ -365,14 +365,14 @@ export default function Home() {
       <section className="py-20 px-6 bg-gray-900 text-white">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl font-extrabold tracking-tight text-center mb-4">Effets Systémiques Croisés</h2>
-          <p className="text-gray-400 text-center mb-12">Comment les impacts se propagent — approche system thinking</p>
+          <p className="text-gray-300 text-center mb-12">Comment les impacts se propagent — approche system thinking</p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {systemicEffects.map((effect, i) => (
               <div key={i} className="rounded-2xl bg-white/5 border border-white/10 p-6 backdrop-blur-sm">
                 <h4 className="text-green-400 font-bold text-sm mb-4">{effect.title}</h4>
                 <div className="space-y-2.5">
                   {effect.steps.map((step, j) => (
-                    <div key={j} className="flex items-center gap-2 text-sm text-white/80">
+                    <div key={j} className="flex items-center gap-2 text-sm text-white/95">
                       {j > 0 && <span className="text-green-500 text-xs">↓</span>}
                       <span>{step}</span>
                     </div>
@@ -412,7 +412,7 @@ export default function Home() {
 
       {/* ── Footer ── */}
       <footer className="py-10 border-t border-gray-100 text-center">
-        <p className="text-sm text-gray-500">Alexis Fayan — Epitech 2026 · Social &amp; Environmental Impact Assessment</p>
+        <p className="text-sm text-gray-600">Alexis Fayan — Epitech 2026 · Social &amp; Environmental Impact Assessment</p>
       </footer>
     </div>
   );
