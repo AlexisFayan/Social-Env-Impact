@@ -15,6 +15,16 @@ import {
   BarChart3,
   Handshake,
   Zap,
+  Target,
+  TrendingUp,
+  TrendingDown,
+  Gauge,
+  Factory,
+  Truck,
+  Package,
+  ShoppingCart,
+  Home as HomeIcon,
+  Trash2,
 } from "lucide-react";
 
 /* ═══════════════════════════════════════
@@ -88,6 +98,170 @@ const systemicEffects = [
   { title: "Extraction → Pauvreté", steps: ["Travail des enfants", "Déscolarisation", "Pauvreté structurelle", "Cycle perpétuel"] },
   { title: "Fabrication → Climat", steps: ["Émissions CO₂", "Changement climatique", "Événements extrêmes", "Migrations climatiques"] },
   { title: "Fin de vie → Alimentation", steps: ["Micro-plastiques", "Contamination océans", "Chaîne alimentaire", "Santé humaine"] },
+];
+
+/* ═══════════════════════════════════════
+   IMPACT ASSESSMENT DATA
+   ═══════════════════════════════════════ */
+
+const impactAssessment = [
+  {
+    id: 1, step: "Extraction des matières premières", icon: Factory, color: "#b45309",
+    impacts: [
+      { type: "Environnemental", icon: Leaf, iconColor: "text-green-600",
+        indicators: [
+          { name: "Émissions CO₂", kpi: "kg CO₂e / tonne extraite", value: "~1 200 kg CO₂e", direction: "down" as const, detail: "Extraction de cobalt en RDC — objectif : réduire de 30% via énergies renouvelables sur site" },
+          { name: "Consommation d'eau", kpi: "m³ / tonne extraite", value: "~50 m³", direction: "down" as const, detail: "Extraction de lithium au Chili — pompage intensif des nappes phréatiques du Salar d'Atacama" },
+          { name: "Surface déforestée", kpi: "hectares / an", value: "~800 ha/an", direction: "down" as const, detail: "Mines d'or en Amazonie péruvienne — perte directe de biodiversité et puits de carbone" },
+        ]},
+      { type: "Social", icon: Users, iconColor: "text-blue-600",
+        indicators: [
+          { name: "Travail des enfants", kpi: "% de la main d'œuvre", value: "~15–20%", direction: "down" as const, detail: "Mines artisanales de cobalt en RDC — 40 000 enfants estimés (UNICEF)" },
+          { name: "Accidents du travail", kpi: "incidents / 1 000 travailleurs / an", value: "~25", direction: "down" as const, detail: "Effondrements, exposition aux poussières toxiques, absence d'EPI" },
+        ]},
+      { type: "Économique", icon: Coins, iconColor: "text-amber-600",
+        indicators: [
+          { name: "Volatilité des prix", kpi: "variation annuelle (%)", value: "±35%", direction: "down" as const, detail: "Cours du cobalt : 80 000$/t en 2018, 26 000$/t en 2023 — instabilité de la supply chain" },
+          { name: "Revenus locaux", kpi: "$/jour/travailleur artisanal", value: "~2–3 $", direction: "up" as const, detail: "Bien en dessous du seuil de pauvreté — aucune redistribution de la valeur ajoutée" },
+        ]},
+    ]
+  },
+  {
+    id: 2, step: "Transformation & Fabrication", icon: Factory, color: "#c2410c",
+    impacts: [
+      { type: "Environnemental", icon: Leaf, iconColor: "text-green-600",
+        indicators: [
+          { name: "Émissions CO₂ usine", kpi: "tonnes CO₂e / usine / an", value: "~15 000 t", direction: "down" as const, detail: "Usine textile moyenne au Bangladesh — charbon comme énergie primaire" },
+          { name: "Pollution des eaux", kpi: "litres d'eau polluée / kg textile", value: "~200 L", direction: "down" as const, detail: "Teintures chimiques rejetées sans traitement — rivières Buriganga, Citarum" },
+          { name: "Consommation énergétique", kpi: "kWh / unité produite", value: "~75 kWh", direction: "down" as const, detail: "Fabrication d'un smartphone — objectif : 50% d'énergie renouvelable d'ici 2030" },
+        ]},
+      { type: "Social", icon: Users, iconColor: "text-blue-600",
+        indicators: [
+          { name: "Salaire horaire", kpi: "$/heure vs seuil de vie décente", value: "0.32 $/h", direction: "up" as const, detail: "Ouvrières textiles au Bangladesh — seuil de vie décente estimé à 0.75$/h (Clean Clothes Campaign)" },
+          { name: "Heures supplémentaires", kpi: "heures / semaine au-delà du légal", value: "+20–30h", direction: "down" as const, detail: "Pics saisonniers : semaines de 70–80h, violations systématiques du code du travail" },
+        ]},
+      { type: "Économique", icon: Coins, iconColor: "text-amber-600",
+        indicators: [
+          { name: "Part travail dans prix final", kpi: "% du prix de vente retail", value: "~2–4%", direction: "up" as const, detail: "T-shirt vendu 29€ → 0.60€ pour l'ouvrier. La marge reste chez la marque et le distributeur" },
+        ]},
+    ]
+  },
+  {
+    id: 3, step: "Emballage & Packaging", icon: Package, color: "#0d9488",
+    impacts: [
+      { type: "Environnemental", icon: Leaf, iconColor: "text-green-600",
+        indicators: [
+          { name: "Plastique à usage unique", kpi: "kg plastique / 1 000 colis", value: "~120 kg", direction: "down" as const, detail: "Films plastique, polystyrène, coussins d'air — 91% non recyclé (National Geographic)" },
+          { name: "Taux de suremballage", kpi: "% volume vide dans le colis", value: "~40%", direction: "down" as const, detail: "Cartons surdimensionnés Amazon : optimisation algorithmique insuffisante" },
+        ]},
+      { type: "Social", icon: Users, iconColor: "text-blue-600",
+        indicators: [
+          { name: "Perception consommateur", kpi: "% consommateurs frustrés par le suremballage", value: "~72%", direction: "down" as const, detail: "Enquête Ipsos 2023 — le suremballage est le 2e irritant après le prix de livraison" },
+        ]},
+      { type: "Économique", icon: Coins, iconColor: "text-amber-600",
+        indicators: [
+          { name: "Coût emballage / colis", kpi: "€ / colis moyen", value: "~1.20 €", direction: "down" as const, detail: "Dont 0.30€ de taxe REP (Responsabilité Élargie du Producteur) en France" },
+          { name: "Taxe éco-contribution", kpi: "€ / tonne d'emballage mise sur le marché", value: "~380 €/t", direction: "up" as const, detail: "Barème CITEO 2024 — incitation financière au réemploi et éco-conception" },
+        ]},
+    ]
+  },
+  {
+    id: 4, step: "Transport & Logistique", icon: Truck, color: "#2563eb",
+    impacts: [
+      { type: "Environnemental", icon: Leaf, iconColor: "text-green-600",
+        indicators: [
+          { name: "Émissions CO₂ transport", kpi: "g CO₂e / tonne-km", value: "Cargo: 10g, Avion: 600g", direction: "down" as const, detail: "Un iPhone Chine→France par avion ≈ 6 kg CO₂e. Par cargo ≈ 0.1 kg CO₂e" },
+          { name: "Pollution maritime (SOx)", kpi: "kg SOx / voyage transocéanique", value: "~5 000 kg", direction: "down" as const, detail: "15 plus gros porte-conteneurs = autant de SOx que 760 millions de voitures" },
+        ]},
+      { type: "Social", icon: Users, iconColor: "text-blue-600",
+        indicators: [
+          { name: "Conditions des marins", kpi: "mois en mer sans escale", value: "6–9 mois", direction: "down" as const, detail: "COVID a bloqué 400 000 marins en mer au-delà de leur contrat (ITF)" },
+          { name: "Accidents routiers livreurs", kpi: "accidents / million km", value: "~4.5", direction: "down" as const, detail: "Pression temporelle, véhicules surchargés, fatigue — 2× la moyenne nationale" },
+        ]},
+      { type: "Économique", icon: Coins, iconColor: "text-amber-600",
+        indicators: [
+          { name: "Coût externalités CO₂", kpi: "€ / tonne CO₂ (non facturé)", value: "~100 €/t", direction: "up" as const, detail: "Coût social du carbone non internalisé — la livraison 'gratuite' a un prix caché" },
+        ]},
+    ]
+  },
+  {
+    id: 5, step: "Distribution & Vente en ligne", icon: ShoppingCart, color: "#7c3aed",
+    impacts: [
+      { type: "Environnemental", icon: Leaf, iconColor: "text-green-600",
+        indicators: [
+          { name: "Énergie data centers", kpi: "kWh / transaction e-commerce", value: "~0.5 kWh", direction: "down" as const, detail: "Recherche produit + paiement + stockage photos — data centers = 1% électricité mondiale" },
+          { name: "PUE (Power Usage Effectiveness)", kpi: "ratio énergie totale / IT utile", value: "~1.58", direction: "down" as const, detail: "Moyenne mondiale. Les meilleurs (Google) atteignent 1.10. Objectif : < 1.3" },
+        ]},
+      { type: "Social", icon: Users, iconColor: "text-blue-600",
+        indicators: [
+          { name: "Greenwashing détecté", kpi: "% de claims environnementaux non vérifiables", value: "~53%", direction: "down" as const, detail: "Étude Commission Européenne 2021 — plus de la moitié des allégations vertes sont vagues ou infondées" },
+        ]},
+      { type: "Économique", icon: Coins, iconColor: "text-amber-600",
+        indicators: [
+          { name: "Concentration du marché", kpi: "part de marché top 5 plateformes", value: "~65%", direction: "down" as const, detail: "Amazon, Alibaba, JD.com, Shopee, eBay — disparition progressive du commerce indépendant" },
+          { name: "Fermetures commerces locaux", kpi: "nombre / an en France", value: "~11 000", direction: "down" as const, detail: "Taux de vacance commerciale en centre-ville : 12.5% en 2023 (Procos)" },
+        ]},
+    ]
+  },
+  {
+    id: 6, step: "Livraison au consommateur", icon: Truck, color: "#db2777",
+    impacts: [
+      { type: "Environnemental", icon: Leaf, iconColor: "text-green-600",
+        indicators: [
+          { name: "CO₂ dernier kilomètre", kpi: "g CO₂e / colis livré", value: "~1 050g", direction: "down" as const, detail: "Véhicule thermique en zone urbaine — 30% des tentatives échouent → relivraison" },
+          { name: "Taux d'échec 1ère livraison", kpi: "% de colis non remis", value: "~12–18%", direction: "down" as const, detail: "Chaque échec = un nouveau trajet. Coût CO₂ doublé pour ces colis" },
+        ]},
+      { type: "Social", icon: Users, iconColor: "text-blue-600",
+        indicators: [
+          { name: "Statut des livreurs", kpi: "% auto-entrepreneurs (sans protection)", value: "~85%", direction: "down" as const, detail: "Pas de congés payés, pas de couverture accident, pas de chômage" },
+          { name: "Colis par jour par livreur", kpi: "nombre moyen", value: "~180", direction: "down" as const, detail: "Objectif imposé quasi-impossible à tenir en 8h → stress, infractions routières" },
+        ]},
+      { type: "Économique", icon: Coins, iconColor: "text-amber-600",
+        indicators: [
+          { name: "Taux de retour e-commerce", kpi: "% des commandes retournées", value: "~30%", direction: "down" as const, detail: "Mode : jusqu'à 50%. Coût moyen d'un retour : 15€. Produits souvent détruits" },
+        ]},
+    ]
+  },
+  {
+    id: 7, step: "Utilisation par le client", icon: HomeIcon, color: "#059669",
+    impacts: [
+      { type: "Environnemental", icon: Leaf, iconColor: "text-green-600",
+        indicators: [
+          { name: "Durée de vie moyenne", kpi: "années avant remplacement", value: "~2.5 ans", direction: "up" as const, detail: "Smartphone : 2.5 ans. Fast fashion : 3–4 utilisations. Électroménager : 8–11 ans" },
+          { name: "Énergie phase d'usage", kpi: "kWh / an / appareil", value: "~15 kWh", direction: "down" as const, detail: "Smartphone : 15 kWh/an. Sèche-linge : 350 kWh/an. TV : 150 kWh/an" },
+        ]},
+      { type: "Social", icon: Users, iconColor: "text-blue-600",
+        indicators: [
+          { name: "Indice de réparabilité", kpi: "score /10 moyen", value: "6.2 /10", direction: "up" as const, detail: "Obligation française depuis 2021 — pousse les fabricants à améliorer la conception" },
+          { name: "Taux de réparation", kpi: "% de pannes réparées vs remplacées", value: "~40%", direction: "up" as const, detail: "Objectif loi AGEC : 60% d'ici 2026. Bonus réparation textile lancé fin 2023" },
+        ]},
+      { type: "Économique", icon: Coins, iconColor: "text-amber-600",
+        indicators: [
+          { name: "Coût de réparation vs remplacement", kpi: "ratio réparation / prix neuf", value: "~67%", direction: "down" as const, detail: "Au-delà de 50%, le consommateur préfère racheter neuf — cercle vicieux de l'obsolescence" },
+        ]},
+    ]
+  },
+  {
+    id: 8, step: "Fin de vie", icon: Trash2, color: "#dc2626",
+    impacts: [
+      { type: "Environnemental", icon: Leaf, iconColor: "text-green-600",
+        indicators: [
+          { name: "E-waste généré", kpi: "kg / habitant / an (France)", value: "~21 kg", direction: "down" as const, detail: "France : 1.4M tonnes/an de DEEE. Monde : 62M tonnes en 2022 (+82% en 12 ans)" },
+          { name: "Taux de recyclage effectif", kpi: "% des déchets électroniques collectés et recyclés", value: "~20%", direction: "up" as const, detail: "80% non tracé : décharge, export illégal (Ghana, Inde), incinération" },
+          { name: "Micro-plastiques dispersés", kpi: "tonnes / an dans les océans (textile)", value: "~500 000 t", direction: "down" as const, detail: "Chaque lavage libère 700 000 microfibres — 35% de la pollution plastique marine" },
+        ]},
+      { type: "Social", icon: Users, iconColor: "text-blue-600",
+        indicators: [
+          { name: "Travailleurs informels du recyclage", kpi: "nombre mondial estimé", value: "~20M", direction: "down" as const, detail: "Agbogbloshie (Ghana), Guiyu (Chine) — exposition au plomb, mercure, cadmium" },
+          { name: "Espérance de vie trieurs informels", kpi: "années vs population générale", value: "-15 ans", direction: "up" as const, detail: "Cancers, maladies respiratoires, neurologiques — sans accès aux soins" },
+        ]},
+      { type: "Économique", icon: Coins, iconColor: "text-amber-600",
+        indicators: [
+          { name: "Valeur matière perdue", kpi: "€ / tonne de DEEE non recyclé", value: "~3 500 €", direction: "up" as const, detail: "Or, argent, palladium, cuivre — 1 tonne de smartphones contient plus d'or qu'1 tonne de minerai" },
+          { name: "Coût du traitement déchets", kpi: "€ / tonne (France, filière officielle)", value: "~450 €/t", direction: "down" as const, detail: "Financé par l'éco-participation sur les produits neufs — souvent insuffisant" },
+        ]},
+    ]
+  },
 ];
 
 /* ═══════════════════════════════════════
@@ -267,6 +441,86 @@ function RamCard({ ram }: { ram: typeof ramifications[0] }) {
   );
 }
 
+function ImpactStepCard({ step }: { step: typeof impactAssessment[0] }) {
+  const [open, setOpen] = useState(false);
+  const StepIcon = step.icon;
+
+  return (
+    <div className="rounded-2xl border border-gray-200 bg-white overflow-hidden hover:shadow-lg transition-all duration-300">
+      <button onClick={() => setOpen(!open)} className="w-full flex items-center gap-4 p-5 text-left cursor-pointer hover:bg-gray-50 transition-colors">
+        <div className="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center text-white" style={{ background: step.color }}>
+          <StepIcon className="w-5 h-5" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-bold text-gray-400">ÉTAPE {step.id}</span>
+          </div>
+          <span className="font-bold text-gray-900 text-base">{step.step}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-xs text-gray-400 hidden sm:block">{step.impacts.reduce((sum, imp) => sum + imp.indicators.length, 0)} KPIs</span>
+          <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
+        </div>
+      </button>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden"
+          >
+            <div className="px-5 pb-5 space-y-4">
+              {step.impacts.map((impact) => {
+                const ImpIcon = impact.icon;
+                return (
+                  <div key={impact.type}>
+                    <div className="flex items-center gap-2 mb-3">
+                      <ImpIcon className={`w-4 h-4 ${impact.iconColor}`} />
+                      <span className="text-sm font-bold text-gray-800">{impact.type}</span>
+                    </div>
+                    <div className="space-y-2">
+                      {impact.indicators.map((ind, j) => (
+                        <div key={j} className="rounded-xl border border-gray-100 bg-gray-50/80 p-4">
+                          <div className="flex items-start justify-between gap-3 mb-1.5">
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2 flex-wrap">
+                                <span className="font-semibold text-sm text-gray-900">{ind.name}</span>
+                                <span className="inline-flex items-center gap-0.5 text-xs px-2 py-0.5 rounded-full bg-gray-200 text-gray-600">
+                                  <Gauge className="w-3 h-3" />
+                                  {ind.kpi}
+                                </span>
+                              </div>
+                            </div>
+                            <div className={`shrink-0 flex items-center gap-1 text-sm font-bold px-3 py-1 rounded-lg ${
+                              ind.direction === "down" 
+                                ? "bg-red-50 text-red-700" 
+                                : "bg-emerald-50 text-emerald-700"
+                            }`}>
+                              {ind.direction === "down" ? (
+                                <TrendingDown className="w-3.5 h-3.5" />
+                              ) : (
+                                <TrendingUp className="w-3.5 h-3.5" />
+                              )}
+                              {ind.value}
+                            </div>
+                          </div>
+                          <p className="text-xs text-gray-500 leading-relaxed mt-1">{ind.detail}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 /* ═══════════════════════════════════════
    PAGE
    ═══════════════════════════════════════ */
@@ -380,6 +634,55 @@ export default function Home() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Évaluation d'Impact — KPIs ── */}
+      <section className="py-20 px-6">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-50 border border-green-200 text-sm font-medium text-green-700 mb-6">
+              <Target className="w-4 h-4" />
+              Évaluation d&apos;Impact — Indicateurs ESG
+            </div>
+            <h2 className="text-3xl font-extrabold tracking-tight mb-4 text-gray-950">Indicateurs &amp; Quantification</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Pour chaque étape du cycle de vie, nous définissons des <strong>KPIs mesurables</strong> (environnementaux, sociaux, économiques) avec des valeurs quantifiées basées sur des données réelles.
+            </p>
+          </div>
+
+          {/* Legend */}
+          <div className="flex items-center justify-center gap-6 mb-10 text-xs text-gray-500">
+            <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-0.5 px-2 py-1 rounded bg-red-50 text-red-700 font-medium">
+                <TrendingDown className="w-3 h-3" /> Valeur
+              </div>
+              <span>= impact négatif, à réduire</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-0.5 px-2 py-1 rounded bg-emerald-50 text-emerald-700 font-medium">
+                <TrendingUp className="w-3 h-3" /> Valeur
+              </div>
+              <span>= indicateur à améliorer / augmenter</span>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            {impactAssessment.map((step) => (
+              <ImpactStepCard key={step.id} step={step} />
+            ))}
+          </div>
+
+          {/* Methodology note */}
+          <div className="mt-10 rounded-2xl border border-green-200 bg-green-50/50 p-6">
+            <h3 className="font-bold text-green-800 mb-2 flex items-center gap-2">
+              <Lightbulb className="w-4 h-4" />
+              Méthodologie
+            </h3>
+            <p className="text-sm text-green-700 leading-relaxed">
+              Les indicateurs suivent le cadre <strong>ESG</strong> (Environmental, Social, Governance) et les principes <strong>SMART</strong> (Specific, Measurable, Actionable, Relevant, Time-bound). Les données proviennent de sources institutionnelles : ADEME, UNICEF, Commission Européenne, Global E-waste Monitor, Clean Clothes Campaign, National Geographic, Procos. Chaque KPI est rattaché à une étape spécifique du cycle de vie e-commerce et quantifié avec des ordres de grandeur réalistes.
+            </p>
           </div>
         </div>
       </section>
