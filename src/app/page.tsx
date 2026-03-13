@@ -580,7 +580,7 @@ export default function Presentation() {
           </div>
           <div className="rounded-xl bg-gray-50 p-5">
             <h4 className="font-bold text-gray-900 mb-2 flex items-center gap-2"><Search className="w-4 h-4 text-green-600" /> Sources principales</h4>
-            <p className="text-sm text-gray-600">UNITAR/ITU (E-waste Monitor 2024), OECD (Plastics Outlook 2022), ADEME (Base Carbone 2023), UNICEF, Amnesty International, Commission Européenne, ILO, Clean Clothes Campaign, Oxfam, Procos, KPMG, DARES, HOP, IUCN.</p>
+            <p className="text-sm text-gray-600">UNITAR/ITU, OECD, ADEME, UNICEF, Amnesty Int., Commission EU, ILO, Oxfam, Banque Mondiale, UNEP, IMO, Google Env. Report, WEF, Eurostat, Basel Action Network, Procos, KPMG, DARES, HOP.</p>
           </div>
         </div>
       </div>
