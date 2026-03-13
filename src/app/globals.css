@@ -25,59 +25,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* ── Print / PDF export ── */
-@media print {
-  * {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
-
-  @page {
-    size: 338.667mm 190.5mm; /* exact 16:9 ratio */
-    margin: 0;
-  }
-
-  html, body {
-    margin: 0 !important;
-    padding: 0 !important;
-    background: black !important;
-    overflow: visible !important;
-    height: auto !important;
-    width: auto !important;
-  }
-
-  .print-container {
-    width: 100%;
-    overflow: visible;
-  }
-
-  .print-slide-page {
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    page-break-after: always;
-    break-after: page;
-    page-break-inside: avoid;
-    break-inside: avoid;
-    position: relative;
-  }
-
-  .print-slide-page:last-child {
-    page-break-after: auto;
-    break-after: auto;
-  }
-
-  /* Force each slide's inner container to fill the page exactly */
-  .print-slide-page > div {
-    width: 100% !important;
-    height: 100vh !important;
-    max-height: 100vh !important;
-    overflow: hidden !important;
-  }
-}
-
-/* Screen-only styles for print-mode rendering (all slides stacked) */
-.print-slide-page {
+/* Screen layout for print-mode slide stacking */
+.pdf-slide {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
