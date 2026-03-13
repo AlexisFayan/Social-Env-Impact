@@ -53,7 +53,7 @@ const ramifications = [
     env: { text: "Déforestation, érosion des sols, pollution des eaux, perte de biodiversité", ex: "Mines de cobalt (RDC), déforestation Amazonie" },
     social: { text: "Travail des enfants, conditions dangereuses, déplacement de populations", ex: "Mines artisanales, exploitation communautés locales" },
     eco: { text: "Dépendance aux ressources non-renouvelables, volatilité des prix", ex: "Concentration géographique des ressources rares" },
-    kpis: [{ label: "CO₂", value: "1 200 kg/t" }, { label: "Travail enfants", value: "15-20%" }, { label: "Volatilité prix", value: "±35%" }],
+    kpis: [{ label: "CO₂ cuivre", value: "2 500 kg/t", src: "IEA 2023" }, { label: "Travail enfants RDC", value: "~40 000", src: "UNICEF 2014" }, { label: "Volatilité cobalt", value: "±70%", src: "LME 2018-2023" }],
   },
   {
     id: 2, title: "Transformation & Fabrication", color: "#c2410c",
@@ -61,7 +61,7 @@ const ramifications = [
     env: { text: "Émissions CO₂, pollution de l'air et de l'eau, consommation d'énergie", ex: "Usines textiles au Bangladesh, électronique en Chine" },
     social: { text: "Conditions de travail précaires, salaires insuffisants, horaires excessifs", ex: "Rana Plaza (2013), usines Foxconn" },
     eco: { text: "Délocalisation, course au moins-disant social", ex: "Fast fashion, électronique low-cost" },
-    kpis: [{ label: "Salaire ouvrier", value: "0.32$/h" }, { label: "Heures sup.", value: "+20-30h/sem" }, { label: "Part travail", value: "2-4% du prix" }],
+    kpis: [{ label: "Salaire ouvrier", value: "0.32$/h", src: "CCC 2023" }, { label: "Heures sup.", value: "+20-30h/sem", src: "ILO Better Work" }, { label: "Part travail", value: "2-4% du prix", src: "Oxfam 2017" }],
   },
   {
     id: 3, title: "Emballage & Packaging", color: "#0d9488",
@@ -69,7 +69,7 @@ const ramifications = [
     env: { text: "Suremballage, plastique à usage unique, déchets", ex: "Cartons Amazon surdimensionnés, polystyrène" },
     social: { text: "Perception de gaspillage, frustration consommateur", ex: "Unboxing vidéos montrant l'excès d'emballage" },
     eco: { text: "Coût caché répercuté sur le prix, gestion des déchets", ex: "Taxe emballage, filières REP" },
-    kpis: [{ label: "Plastique non recyclé", value: "91%" }, { label: "Volume vide/colis", value: "~40%" }, { label: "Frustration conso.", value: "72%" }],
+    kpis: [{ label: "Plastique non recyclé", value: "91%", src: "OECD 2022" }, { label: "Volume vide/colis", value: "~40%", src: "DS Smith 2020" }, { label: "Frustration conso.", value: "62%", src: "DS Smith 2020" }],
   },
   {
     id: 4, title: "Transport & Logistique", color: "#2563eb",
@@ -77,7 +77,7 @@ const ramifications = [
     env: { text: "Émissions CO₂ (cargo, avion, camion), pollution maritime", ex: "Cargo Chine→Europe ≈ 15 000 km" },
     social: { text: "Conditions des chauffeurs/livreurs, précarité gig economy", ex: "Livreurs Amazon, marins marchands" },
     eco: { text: "Coût du dernier kilomètre, externalités non internalisées", ex: "Livraison gratuite = coût environnemental invisible" },
-    kpis: [{ label: "CO₂ avion", value: "600g/t-km" }, { label: "Marins bloqués", value: "400 000" }, { label: "Coût CO₂ caché", value: "100€/t" }],
+    kpis: [{ label: "CO₂ avion", value: "602g/t-km", src: "ADEME 2023" }, { label: "Marins bloqués COVID", value: "400 000", src: "ITF 2020" }, { label: "Coût social CO₂", value: "100€/t", src: "Quinet 2019" }],
   },
   {
     id: 5, title: "Distribution & Vente en ligne", color: "#7c3aed",
@@ -85,7 +85,7 @@ const ramifications = [
     env: { text: "Data centers énergivores, consommation électrique serveurs", ex: "AWS, Google Cloud — ~1% électricité mondiale" },
     social: { text: "Opacité de l'information, greenwashing, manipulation des avis", ex: "Labels trompeurs, faux éco-responsable" },
     eco: { text: "Concentration du marché, disparition du commerce local", ex: "Amazon = 40% du e-commerce US" },
-    kpis: [{ label: "Greenwashing", value: "53% des claims" }, { label: "Part top 5", value: "65% du marché" }, { label: "Fermetures/an FR", value: "11 000" }],
+    kpis: [{ label: "Greenwashing", value: "53.3%", src: "Commission EU 2021" }, { label: "Part top 5", value: "~63%", src: "eMarketer 2023" }, { label: "Fermetures/an FR", value: "~11 000", src: "Procos 2023" }],
   },
   {
     id: 6, title: "Livraison au consommateur", color: "#db2777",
@@ -93,7 +93,7 @@ const ramifications = [
     env: { text: "Derniers km en véhicule thermique, livraisons multiples", ex: "30% d'échec 1ère livraison" },
     social: { text: "Pression sur les livreurs, accidents, précarité", ex: "Micro-entrepreneurs sans protection sociale" },
     eco: { text: "Coût des retours (30% en fashion), gaspillage logistique", ex: "Produits retournés souvent détruits" },
-    kpis: [{ label: "CO₂/colis", value: "1 050g" }, { label: "Auto-entrepreneurs", value: "85%" }, { label: "Retours mode", value: "30-50%" }],
+    kpis: [{ label: "CO₂/colis urbain", value: "~500g", src: "ADEME 2022" }, { label: "Auto-entrepreneurs", value: "~75%", src: "DARES 2022" }, { label: "Retours mode", value: "30-50%", src: "KPMG 2023" }],
   },
   {
     id: 7, title: "Utilisation par le client", color: "#059669",
@@ -101,7 +101,7 @@ const ramifications = [
     env: { text: "Consommation d'énergie, eau, produits chimiques", ex: "Machine à laver, recharge smartphone" },
     social: { text: "Obsolescence programmée, frustration, surconsommation", ex: "Batteries non remplaçables, modes éphémères" },
     eco: { text: "Coût de possession vs coût d'achat", ex: "Réparation plus chère que le remplacement" },
-    kpis: [{ label: "Durée de vie tel.", value: "2.5 ans" }, { label: "Réparabilité", value: "6.2/10" }, { label: "Réparation/neuf", value: "67% du prix" }],
+    kpis: [{ label: "Durée de vie tel.", value: "2.5 ans", src: "ADEME 2023" }, { label: "Réparabilité", value: "6.2/10", src: "HOP 2023" }, { label: "Réparation/neuf", value: "~60%", src: "ADEME 2022" }],
   },
   {
     id: 8, title: "Fin de vie", color: "#dc2626",
@@ -109,7 +109,7 @@ const ramifications = [
     env: { text: "E-waste, pollution des sols, micro-plastiques", ex: "Agbogbloshie (Ghana), désert Atacama" },
     social: { text: "Recyclage informel dangereux, exposition aux toxiques", ex: "Tri des déchets par des enfants" },
     eco: { text: "Perte de valeur matière, coût du traitement", ex: "Seulement 20% des e-waste recyclés" },
-    kpis: [{ label: "E-waste monde", value: "62M tonnes" }, { label: "Recyclé", value: "seulement 20%" }, { label: "Valeur perdue", value: "3 500€/t" }],
+    kpis: [{ label: "E-waste monde", value: "62Mt/an", src: "UNITAR/ITU 2024" }, { label: "Recyclé", value: "22.3%", src: "UNITAR 2024" }, { label: "Valeur perdue", value: "~57 Mrd$", src: "UNEP 2019" }],
   },
 ];
 
@@ -195,7 +195,7 @@ function CircleDiagram() {
    SLIDE LAYOUTS
    ═══════════════════════════════════════ */
 
-const TOTAL_SLIDES = 15;
+const TOTAL_SLIDES = 16;
 
 /* ── Slide wrapper ── */
 function Slide({ children, className = "" }: { children: React.ReactNode; className?: string }) {
@@ -271,6 +271,7 @@ function StepSlide({ ram }: { ram: typeof ramifications[0] }) {
             <div key={i} className="rounded-xl bg-white/10 backdrop-blur-md border border-white/15 px-6 py-3 text-center">
               <div className="text-2xl font-extrabold text-white">{kpi.value}</div>
               <div className="text-xs text-white/60 mt-0.5">{kpi.label}</div>
+              <div className="text-[10px] text-white/30 mt-1 italic">{kpi.src}</div>
             </div>
           ))}
         </div>
@@ -328,16 +329,19 @@ export default function Presentation() {
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl">
         <div className="rounded-2xl bg-white/5 border border-white/10 p-8 backdrop-blur-sm text-center">
-          <div className="text-5xl font-black text-red-400 mb-2">62M</div>
-          <div className="text-sm text-white/70">tonnes de e-waste par an dans le monde</div>
+          <div className="text-5xl font-black text-red-400 mb-2">62Mt</div>
+          <div className="text-sm text-white/70">de e-waste générés par an dans le monde</div>
+          <div className="text-[10px] text-white/30 mt-2 italic">Global E-waste Monitor, UNITAR/ITU 2024</div>
         </div>
         <div className="rounded-2xl bg-white/5 border border-white/10 p-8 backdrop-blur-sm text-center">
           <div className="text-5xl font-black text-red-400 mb-2">91%</div>
           <div className="text-sm text-white/70">du plastique n&apos;est jamais recyclé</div>
+          <div className="text-[10px] text-white/30 mt-2 italic">OECD Global Plastics Outlook 2022</div>
         </div>
         <div className="rounded-2xl bg-white/5 border border-white/10 p-8 backdrop-blur-sm text-center">
           <div className="text-5xl font-black text-red-400 mb-2">40K</div>
           <div className="text-sm text-white/70">enfants dans les mines de cobalt (RDC)</div>
+          <div className="text-[10px] text-white/30 mt-2 italic">UNICEF 2014, Amnesty International 2016</div>
         </div>
       </div>
       <p className="text-white/50 text-sm mt-8 max-w-2xl">
@@ -460,14 +464,51 @@ export default function Presentation() {
             <p className="text-sm text-gray-600">Specific, Measurable, Actionable, Relevant, Time-bound — chaque indicateur est concret et vérifiable.</p>
           </div>
           <div className="rounded-xl bg-gray-50 p-5">
-            <h4 className="font-bold text-gray-900 mb-2 flex items-center gap-2"><Search className="w-4 h-4 text-green-600" /> Sources</h4>
-            <p className="text-sm text-gray-600">ADEME, UNICEF, Commission Européenne, Global E-waste Monitor, Clean Clothes Campaign, Procos, CITEO.</p>
+            <h4 className="font-bold text-gray-900 mb-2 flex items-center gap-2"><Search className="w-4 h-4 text-green-600" /> Sources principales</h4>
+            <p className="text-sm text-gray-600">UNITAR/ITU (E-waste Monitor 2024), OECD (Plastics Outlook 2022), ADEME (Base Carbone 2023), UNICEF, Amnesty International, Commission Européenne, ILO, Clean Clothes Campaign, Oxfam, Procos, KPMG, DARES, HOP, IUCN.</p>
           </div>
         </div>
       </div>
     </Slide>,
 
-    /* ═══ 14 — Conclusion ═══ */
+    /* ═══ 14 — Sources ═══ */
+    <Slide key="sources" className="bg-gray-950">
+      <div className="max-w-5xl w-full">
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-10 text-center">Sources &amp; Références</h2>
+        <div className="grid sm:grid-cols-2 gap-x-8 gap-y-2 text-sm">
+          {[
+            { ref: "UNITAR/ITU", detail: "Global E-waste Monitor 2024 — 62Mt e-waste, 22.3% recyclés" },
+            { ref: "OECD", detail: "Global Plastics Outlook 2022 — 91% plastique non recyclé" },
+            { ref: "UNICEF", detail: "Rapport travail des enfants RDC 2014 — ~40 000 enfants dans les mines" },
+            { ref: "Amnesty International", detail: "\"This is what we die for\" 2016 — cobalt supply chain" },
+            { ref: "ADEME", detail: "Base Carbone 2023 — facteurs d'émission transport, durée de vie produits" },
+            { ref: "Clean Clothes Campaign", detail: "Salaires textiles Bangladesh 2023 — 0.32$/h, seuil décent 0.75$/h" },
+            { ref: "ILO / Better Work", detail: "Conditions de travail usines textiles, heures supplémentaires" },
+            { ref: "Oxfam", detail: "\"What She Makes\" 2017 — 2-4% du prix retail va à l'ouvrier" },
+            { ref: "Commission Européenne", detail: "Screening environmental claims 2021 — 53.3% greenwashing" },
+            { ref: "DS Smith", detail: "Packaging survey 2020 — 40% volume vide, 62% frustration consommateurs" },
+            { ref: "Procos", detail: "Vacance commerciale France 2023 — ~11 000 fermetures/an" },
+            { ref: "eMarketer", detail: "Global e-commerce market share 2023 — top 5 = ~63%" },
+            { ref: "DARES", detail: "Statut livreurs plateformes France 2022 — ~75% auto-entrepreneurs" },
+            { ref: "KPMG", detail: "E-commerce returns 2023 — 30-50% retours en mode" },
+            { ref: "ITF", detail: "International Transport Workers' Federation — 400 000 marins bloqués (COVID 2020)" },
+            { ref: "Quinet", detail: "Commission Quinet 2019 — valeur tutélaire du carbone : 100€/tCO₂" },
+            { ref: "IEA", detail: "International Energy Agency 2023 — émissions extraction cuivre : ~2 500 kg CO₂e/t" },
+            { ref: "LME", detail: "London Metal Exchange — cours du cobalt 2018-2023, variation ±70%" },
+            { ref: "HOP", detail: "Halte à l'Obsolescence Programmée 2023 — indice réparabilité moyen 6.2/10" },
+            { ref: "IUCN", detail: "Primary microplastics in the oceans 2017 — 500 000 t/an (textile)" },
+            { ref: "UNEP", detail: "Recyclable metals value 2019 — valeur matière perdue ~57 Mrd$/an" },
+          ].map((s, i) => (
+            <div key={i} className="flex items-start gap-2 py-1.5 border-b border-white/5">
+              <span className="text-green-400 font-bold shrink-0 w-44 text-right">{s.ref}</span>
+              <span className="text-white/60">{s.detail}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Slide>,
+
+    /* ═══ 15 — Conclusion ═══ */
     <ImageSlide key="conclusion" src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1400&q=80" overlay="bg-black/55">
       <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-10">
         Merci !
