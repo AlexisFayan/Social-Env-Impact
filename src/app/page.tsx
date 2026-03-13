@@ -29,6 +29,8 @@ import {
   Trash2,
   AlertTriangle,
   Globe,
+  Download,
+  MapPin,
 } from "lucide-react";
 
 /* ═══════════════════════════════════════
@@ -49,67 +51,115 @@ const steps = [
 const ramifications = [
   {
     id: 1, title: "Extraction des matières premières", color: "#b45309",
-    img: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=1400&q=80",
-    env: { text: "Déforestation, érosion des sols, pollution des eaux, perte de biodiversité", ex: "Mines de cobalt (RDC), déforestation Amazonie" },
-    social: { text: "Travail des enfants, conditions dangereuses, déplacement de populations", ex: "Mines artisanales, exploitation communautés locales" },
-    eco: { text: "Dépendance aux ressources non-renouvelables, volatilité des prix", ex: "Concentration géographique des ressources rares" },
-    kpis: [{ label: "CO₂ cuivre", value: "2 500 kg/t", src: "IEA 2023" }, { label: "Travail enfants RDC", value: "~40 000", src: "UNICEF 2014" }, { label: "Volatilité cobalt", value: "±70%", src: "LME 2018-2023" }],
+    img: "https://images.unsplash.com/photo-1629807473015-41699c4471b5?w=1400&q=80",
+    env: { text: "Déforestation, érosion des sols, pollution des nappes phréatiques, perte de biodiversité", ex: "Mines de cobalt au Katanga (RDC), déforestation Amazonie pour l'or" },
+    social: { text: "Travail des enfants, conditions dangereuses, déplacement de populations autochtones", ex: "40 000 enfants dans les mines artisanales de RDC" },
+    eco: { text: "Dépendance aux ressources non-renouvelables, volatilité extrême des prix", ex: "80% du cobalt mondial concentré en RDC" },
+    geo: { text: "Sols rendus stériles, rivières contaminées, écosystèmes locaux détruits sur des km²", ex: "Katanga (RDC), Cerro de Pasco (Pérou), Norilsk (Russie)" },
+    kpis: [
+      { label: "CO₂ cuivre", value: "2 500 kg/t", impact: "≈ 1 voiture pendant 1 an par tonne", src: "IEA 2023", cat: "ENV" },
+      { label: "Travail enfants RDC", value: "~40 000", impact: "Génération privée de scolarisation", src: "UNICEF 2014", cat: "SOC" },
+      { label: "Volatilité cobalt", value: "±70%", impact: "Instabilité économique pays producteurs", src: "LME 2018-2023", cat: "ECO" },
+      { label: "Terres dégradées mines", value: "~33Mha", impact: "≈ surface de la Pologne inexploitable", src: "UNEP 2019", cat: "GEO" },
+    ],
   },
   {
     id: 2, title: "Transformation & Fabrication", color: "#c2410c",
-    img: "https://images.unsplash.com/photo-1513828583688-c52646db42da?w=1400&q=80",
-    env: { text: "Émissions CO₂, pollution de l'air et de l'eau, consommation d'énergie", ex: "Usines textiles au Bangladesh, électronique en Chine" },
-    social: { text: "Conditions de travail précaires, salaires insuffisants, horaires excessifs", ex: "Rana Plaza (2013), usines Foxconn" },
-    eco: { text: "Délocalisation, course au moins-disant social", ex: "Fast fashion, électronique low-cost" },
-    kpis: [{ label: "Salaire ouvrier", value: "0.32$/h", src: "CCC 2023" }, { label: "Heures sup.", value: "+20-30h/sem", src: "ILO Better Work" }, { label: "Part travail", value: "2-4% du prix", src: "Oxfam 2017" }],
+    img: "https://images.unsplash.com/photo-1574184383650-5f859b6793c5?w=1400&q=80",
+    env: { text: "Émissions CO₂, pollution de l'air et de l'eau, consommation massive d'énergie", ex: "Usines textiles au Bangladesh, fonderies en Chine" },
+    social: { text: "Conditions de travail précaires, salaires sous le seuil de pauvreté, horaires excessifs", ex: "Rana Plaza 1 134 morts (2013), suicides usines Foxconn" },
+    eco: { text: "Délocalisation, course au moins-disant social et fiscal", ex: "Fast fashion : cycle design-vente en 2 semaines" },
+    geo: { text: "Smog urbain chronique, rivières colorées par les teintures, zones inhabitables", ex: "Delta Rivière des Perles (Chine), Dhaka (Bangladesh)" },
+    kpis: [
+      { label: "Salaire ouvrier textile", value: "0.32$/h", impact: "Sous le seuil de pauvreté local", src: "CCC 2023", cat: "SOC" },
+      { label: "Heures sup.", value: "+20-30h/sem", impact: "Épuisement physique chronique", src: "ILO Better Work", cat: "SOC" },
+      { label: "Part travail/prix", value: "2-4%", impact: "Aucune marge d'épargne pour l'ouvrier", src: "Oxfam 2017", cat: "ECO" },
+      { label: "Pollution eau industrie", value: "20%", impact: "1/5 des eaux usées mondiales = textile", src: "Banque Mondiale 2019", cat: "GEO" },
+    ],
   },
   {
     id: 3, title: "Emballage & Packaging", color: "#0d9488",
-    img: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1400&q=80",
-    env: { text: "Suremballage, plastique à usage unique, déchets", ex: "Cartons Amazon surdimensionnés, polystyrène" },
-    social: { text: "Perception de gaspillage, frustration consommateur", ex: "Unboxing vidéos montrant l'excès d'emballage" },
-    eco: { text: "Coût caché répercuté sur le prix, gestion des déchets", ex: "Taxe emballage, filières REP" },
-    kpis: [{ label: "Plastique non recyclé", value: "91%", src: "OECD 2022" }, { label: "Volume vide/colis", value: "~40%", src: "DS Smith 2020" }, { label: "Frustration conso.", value: "62%", src: "DS Smith 2020" }],
+    img: "https://images.unsplash.com/photo-1573376671096-e1fce2d1f19d?w=1400&q=80",
+    env: { text: "Suremballage, plastique à usage unique, production de déchets non recyclables", ex: "Cartons Amazon surdimensionnés, calages polystyrène" },
+    social: { text: "Perception de gaspillage, frustration consommateur, perte de confiance", ex: "Vidéos unboxing virales dénonçant l'excès d'emballage" },
+    eco: { text: "Coût caché répercuté sur le prix final, coût de gestion des déchets", ex: "Taxe emballage, filières REP en France" },
+    geo: { text: "Décharges saturées, pollution des littoraux et océans par le plastique", ex: "Great Pacific Garbage Patch, plages d'Asie du Sud-Est" },
+    kpis: [
+      { label: "Plastique non recyclé", value: "91%", impact: "Accumulation permanente dans l'environnement", src: "OECD 2022", cat: "ENV" },
+      { label: "Volume vide/colis", value: "~40%", impact: "40% du transport = du vide inutile", src: "DS Smith 2020", cat: "ECO" },
+      { label: "Frustration conso.", value: "62%", impact: "Perte de confiance envers les marques", src: "DS Smith 2020", cat: "SOC" },
+      { label: "Plastique océans/an", value: "11Mt", impact: "Contamination chaîne alimentaire marine", src: "UNEP 2021", cat: "GEO" },
+    ],
   },
   {
     id: 4, title: "Transport & Logistique", color: "#2563eb",
-    img: "https://images.unsplash.com/photo-1494412574643-ff11b0a5eb19?w=1400&q=80",
-    env: { text: "Émissions CO₂ (cargo, avion, camion), pollution maritime", ex: "Cargo Chine→Europe ≈ 15 000 km" },
-    social: { text: "Conditions des chauffeurs/livreurs, précarité gig economy", ex: "Livreurs Amazon, marins marchands" },
-    eco: { text: "Coût du dernier kilomètre, externalités non internalisées", ex: "Livraison gratuite = coût environnemental invisible" },
-    kpis: [{ label: "CO₂ avion", value: "602g/t-km", src: "ADEME 2023" }, { label: "Marins bloqués COVID", value: "400 000", src: "ITF 2020" }, { label: "Coût social CO₂", value: "100€/t", src: "Quinet 2019" }],
+    img: "https://images.unsplash.com/photo-1614571272828-2d8289ff8fc0?w=1400&q=80",
+    env: { text: "Émissions CO₂ massives (cargo, avion, camion), pollution maritime au soufre", ex: "Cargo Chine→Europe ≈ 15 000 km, fret aérien express" },
+    social: { text: "Conditions des chauffeurs routiers et marins, précarité de la gig economy", ex: "Marins bloqués en mer pendant COVID, chauffeurs isolés" },
+    eco: { text: "Coût du dernier kilomètre, externalités environnementales non internalisées", ex: "Livraison 'gratuite' = coût environnemental invisible" },
+    geo: { text: "Congestion portuaire, pollution de l'air dans les corridors logistiques", ex: "Rotterdam, détroit de Malacca, autoroutes A1/A6 France" },
+    kpis: [
+      { label: "CO₂ avion cargo", value: "602g/t-km", impact: "50× plus polluant que le cargo maritime", src: "ADEME 2023", cat: "ENV" },
+      { label: "Marins bloqués COVID", value: "400 000", impact: "Crises de santé mentale en mer", src: "ITF 2020", cat: "SOC" },
+      { label: "Coût social CO₂", value: "100€/t", impact: "Non répercuté dans le prix produit", src: "Quinet 2019", cat: "ECO" },
+      { label: "SO₂ transport maritime", value: "13%", impact: "Pluies acides sur les zones côtières", src: "IMO 2020", cat: "GEO" },
+    ],
   },
   {
     id: 5, title: "Distribution & Vente en ligne", color: "#7c3aed",
-    img: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=80",
-    env: { text: "Data centers énergivores, consommation électrique serveurs", ex: "AWS, Google Cloud — ~1% électricité mondiale" },
-    social: { text: "Opacité de l'information, greenwashing, manipulation des avis", ex: "Labels trompeurs, faux éco-responsable" },
-    eco: { text: "Concentration du marché, disparition du commerce local", ex: "Amazon = 40% du e-commerce US" },
-    kpis: [{ label: "Greenwashing", value: "53.3%", src: "Commission EU 2021" }, { label: "Part top 5", value: "~63%", src: "eMarketer 2023" }, { label: "Fermetures/an FR", value: "~11 000", src: "Procos 2023" }],
+    img: "https://images.unsplash.com/photo-1662890459081-87e680bb1b00?w=1400&q=80",
+    env: { text: "Data centers énergivores, consommation électrique et en eau des serveurs", ex: "AWS, Google Cloud — ~1% de l'électricité mondiale" },
+    social: { text: "Opacité de l'information, greenwashing, manipulation des avis consommateurs", ex: "53% des allégations 'vertes' sont trompeuses (UE)" },
+    eco: { text: "Concentration du marché, disparition du commerce de proximité", ex: "Amazon = 40% du e-commerce US, 50% en Europe" },
+    geo: { text: "Data centers pompant l'eau locale en zones rurales, désertification des centres-villes", ex: "Data centers Google Oregon : 21 Mrd litres d'eau/an" },
+    kpis: [
+      { label: "Greenwashing UE", value: "53.3%", impact: "Consommateurs induits en erreur", src: "Commission EU 2021", cat: "SOC" },
+      { label: "Part top 5 e-commerce", value: "~63%", impact: "Oligopole étouffant la concurrence", src: "eMarketer 2023", cat: "ECO" },
+      { label: "Fermetures commerces FR", value: "~11 000/an", impact: "Désertification des centres-villes", src: "Procos 2023", cat: "GEO" },
+      { label: "Eau data centers Google", value: "21 Mrd L", impact: "Stress hydrique communautés voisines", src: "Google Env. Report 2024", cat: "ENV" },
+    ],
   },
   {
     id: 6, title: "Livraison au consommateur", color: "#db2777",
-    img: "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=1400&q=80",
-    env: { text: "Derniers km en véhicule thermique, livraisons multiples", ex: "30% d'échec 1ère livraison" },
-    social: { text: "Pression sur les livreurs, accidents, précarité", ex: "Micro-entrepreneurs sans protection sociale" },
-    eco: { text: "Coût des retours (30% en fashion), gaspillage logistique", ex: "Produits retournés souvent détruits" },
-    kpis: [{ label: "CO₂/colis urbain", value: "~500g", src: "ADEME 2022" }, { label: "Auto-entrepreneurs", value: "~75%", src: "DARES 2022" }, { label: "Retours mode", value: "30-50%", src: "KPMG 2023" }],
+    img: "https://images.unsplash.com/photo-1620455800201-7f00aeef12ed?w=1400&q=80",
+    env: { text: "Derniers km en véhicule thermique, livraisons échouées et tentatives multiples", ex: "30% d'échec 1ère livraison = trajets doublés" },
+    social: { text: "Pression sur les livreurs, accidents, précarité sans protection sociale", ex: "Micro-entrepreneurs sans congés ni assurance" },
+    eco: { text: "Coût des retours (30-50% en fashion), produits retournés souvent détruits", ex: "Amazon détruit ~30% des produits retournés" },
+    geo: { text: "Congestion urbaine par les camionnettes, pollution de l'air en centre-ville", ex: "Paris, Londres : +30% véhicules de livraison d'ici 2030" },
+    kpis: [
+      { label: "CO₂/colis urbain", value: "~500g", impact: "×3 Mrd colis/an FR = 1.5Mt CO₂", src: "ADEME 2022", cat: "ENV" },
+      { label: "Auto-entrepreneurs", value: "~75%", impact: "Aucune protection sociale ni chômage", src: "DARES 2022", cat: "SOC" },
+      { label: "Retours mode", value: "30-50%", impact: "Gaspillage logistique et destruction", src: "KPMG 2023", cat: "ECO" },
+      { label: "Congestion urbaine", value: "+30%", impact: "Temps perdu et pollution pour tous", src: "WEF 2020", cat: "GEO" },
+    ],
   },
   {
     id: 7, title: "Utilisation par le client", color: "#059669",
-    img: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1400&q=80",
-    env: { text: "Consommation d'énergie, eau, produits chimiques", ex: "Machine à laver, recharge smartphone" },
-    social: { text: "Obsolescence programmée, frustration, surconsommation", ex: "Batteries non remplaçables, modes éphémères" },
-    eco: { text: "Coût de possession vs coût d'achat", ex: "Réparation plus chère que le remplacement" },
-    kpis: [{ label: "Durée de vie tel.", value: "2.5 ans", src: "ADEME 2023" }, { label: "Réparabilité", value: "6.2/10", src: "HOP 2023" }, { label: "Réparation/neuf", value: "~60%", src: "ADEME 2022" }],
+    img: "https://images.unsplash.com/photo-1612831661941-254341b885e9?w=1400&q=80",
+    env: { text: "Consommation d'énergie, eau, produits chimiques au quotidien", ex: "Machine à laver : 50L/cycle, recharge smartphone 365×/an" },
+    social: { text: "Obsolescence programmée, frustration, spirale de surconsommation", ex: "Batteries non remplaçables, mises à jour qui ralentissent" },
+    eco: { text: "Coût de possession supérieur au coût d'achat, réparation découragée", ex: "Réparation plus chère que le remplacement" },
+    geo: { text: "Déchets ménagers en augmentation, saturation des déchèteries municipales", ex: "580 kg de déchets/habitant/an en France" },
+    kpis: [
+      { label: "Durée de vie tél.", value: "2.5 ans", impact: "Remplacement 4× plus rapide que nécessaire", src: "ADEME 2023", cat: "ENV" },
+      { label: "Réparabilité moy.", value: "6.2/10", impact: "Majorité des produits difficiles à réparer", src: "HOP 2023", cat: "SOC" },
+      { label: "Réparation/neuf", value: "~60%", impact: "Incitation économique au remplacement", src: "ADEME 2022", cat: "ECO" },
+      { label: "Déchets ménagers FR", value: "580 kg/hab", impact: "Saturation infrastructures de traitement", src: "Eurostat 2022", cat: "GEO" },
+    ],
   },
   {
     id: 8, title: "Fin de vie", color: "#dc2626",
-    img: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=1400&q=80",
-    env: { text: "E-waste, pollution des sols, micro-plastiques", ex: "Agbogbloshie (Ghana), désert Atacama" },
-    social: { text: "Recyclage informel dangereux, exposition aux toxiques", ex: "Tri des déchets par des enfants" },
-    eco: { text: "Perte de valeur matière, coût du traitement", ex: "Seulement 20% des e-waste recyclés" },
-    kpis: [{ label: "E-waste monde", value: "62Mt/an", src: "UNITAR/ITU 2024" }, { label: "Recyclé", value: "22.3%", src: "UNITAR 2024" }, { label: "Valeur perdue", value: "~57 Mrd$", src: "UNEP 2019" }],
+    img: "https://images.unsplash.com/photo-1624218811362-481d87e6c351?w=1400&q=80",
+    env: { text: "E-waste, pollution des sols par métaux lourds, micro-plastiques", ex: "Agbogbloshie (Ghana), désert d'Atacama (Chili)" },
+    social: { text: "Recyclage informel dangereux, exposition aux toxiques sans protection", ex: "Enfants triant les déchets électroniques à mains nues" },
+    eco: { text: "Perte de valeur matière, coût de traitement supérieur à la valeur récupérée", ex: "Seulement 22% des e-waste correctement recyclés" },
+    geo: { text: "Export illégal de déchets vers l'Afrique de l'Ouest, contamination sols et eaux", ex: "Agbogbloshie (Ghana), Lagos (Nigeria), Guiyu (Chine)" },
+    kpis: [
+      { label: "E-waste monde", value: "62Mt/an", impact: "+21% en 5 ans, croissance continue", src: "UNITAR/ITU 2024", cat: "ENV" },
+      { label: "Taux recyclé", value: "22.3%", impact: "78% finit en décharge ou incinération", src: "UNITAR 2024", cat: "ECO" },
+      { label: "Valeur perdue", value: "~57 Mrd$", impact: "Métaux précieux enfouis non récupérés", src: "UNEP 2019", cat: "ECO" },
+      { label: "Export e-waste Afrique", value: "~1Mt/an", impact: "Contamination sols et eaux locales", src: "BAN 2021", cat: "GEO" },
+    ],
   },
 ];
 
@@ -117,8 +167,41 @@ const systemicEffects = [
   { title: "Extraction → Santé", steps: ["Extraction minière", "Pollution des eaux", "Santé des communautés", "Coûts de santé"] },
   { title: "Extraction → Pauvreté", steps: ["Travail des enfants", "Déscolarisation", "Pauvreté structurelle", "Cycle perpétuel"] },
   { title: "Fabrication → Climat", steps: ["Émissions CO₂", "Changement climatique", "Événements extrêmes", "Migrations climatiques"] },
+  { title: "Transport → Santé urbaine", steps: ["Camions thermiques", "NOₓ & particules fines", "Asthme & cardio", "Coût santé publique"] },
+  { title: "Distribution → Commerce local", steps: ["Concentration e-commerce", "Fermeture boutiques", "Désertification centres", "Fracture territoriale"] },
   { title: "Fin de vie → Alimentation", steps: ["Micro-plastiques", "Contamination océans", "Chaîne alimentaire", "Santé humaine"] },
 ];
+
+const sourceUrls: Record<string, string> = {
+  "IEA 2023": "https://www.iea.org/reports/energy-technology-perspectives-2023",
+  "UNICEF 2014": "https://www.unicef.org/drcongo/en/topics/child-labour",
+  "LME 2018-2023": "https://www.lme.com/metals/ev/lme-cobalt",
+  "CCC 2023": "https://cleanclothes.org/campaigns/bmwc",
+  "ILO Better Work": "https://betterwork.org/reports-and-publications/",
+  "Oxfam 2017": "https://www.oxfam.org.au/what-she-makes/",
+  "OECD 2022": "https://www.oecd.org/en/publications/2022/02/global-plastics-outlook_a653d1c9.html",
+  "DS Smith 2020": "https://www.dssmith.com/EmptySpaceEnglish",
+  "ADEME 2023": "https://base-empreinte.ademe.fr/",
+  "ADEME 2022": "https://base-empreinte.ademe.fr/",
+  "ITF 2020": "https://www.itfglobal.org/en/news/crew-change-crisis-risks-becoming-forced-labour-epidemic-tragedy-hits-six-month-mark-world",
+  "Quinet 2019": "https://www.strategie.gouv.fr/sites/strategie.gouv.fr/files/atoms/files/dp-valeur-action-pour-climat-fevrier-2019.pdf",
+  "Commission EU 2021": "https://ec.europa.eu/commission/presscorner/detail/en/ip_21_269",
+  "eMarketer 2023": "https://www.insiderintelligence.com/",
+  "Procos 2023": "https://www.procos.org/",
+  "DARES 2022": "https://dares.travail-emploi.gouv.fr/publication/les-travailleurs-de-plateforme-quels-profils-et-quelles-conditions-de-travail",
+  "KPMG 2023": "https://assets.kpmg.com/content/dam/kpmg/ie/pdf/2021/05/ie-front-row-seeing-fashions-future.pdf",
+  "HOP 2023": "https://www.halteobsolescence.org/lindice-de-reparabilite-tient-il-ses-promesses/",
+  "UNITAR/ITU 2024": "https://ewastemonitor.info/the-global-e-waste-monitor-2024/",
+  "UNITAR 2024": "https://ewastemonitor.info/the-global-e-waste-monitor-2024/",
+  "UNEP 2019": "https://ewastemonitor.info/gem-2020/",
+  "UNEP 2021": "https://www.unep.org/resources/pollution-solution-global-assessment-marine-litter-and-plastic-pollution",
+  "Banque Mondiale 2019": "https://www.worldbank.org/en/news/feature/2019/09/23/costo-de-la-contaminacion-de-la-industria-textil",
+  "IMO 2020": "https://www.imo.org/en/MediaCentre/HotTopics/Pages/Sulphur-2020.aspx",
+  "Google Env. Report 2024": "https://sustainability.google/reports/google-2024-environmental-report/",
+  "WEF 2020": "https://www.weforum.org/reports/the-future-of-the-last-mile-ecosystem/",
+  "Eurostat 2022": "https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Municipal_waste_statistics",
+  "BAN 2021": "https://www.ban.org/news/2021/1/7/ban-report-export-of-e-waste",
+};
 
 /* ═══════════════════════════════════════
    CIRCLE DIAGRAM
@@ -219,6 +302,8 @@ function ImageSlide({ src, overlay = "bg-black/60", children }: { src: string; o
   );
 }
 
+const catColors: Record<string, string> = { ENV: "bg-green-500", SOC: "bg-blue-500", ECO: "bg-amber-500", GEO: "bg-orange-500" };
+
 /* ── Step slide (for each cycle step) ── */
 function StepSlide({ ram }: { ram: typeof ramifications[0] }) {
   return (
@@ -230,48 +315,65 @@ function StepSlide({ ram }: { ram: typeof ramifications[0] }) {
 
       <div className="w-full max-w-5xl">
         {/* Header */}
-        <div className="mb-8">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-bold text-white/90 mb-4" style={{ background: ram.color }}>
+        <div className="mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-bold text-white/90 mb-3" style={{ background: ram.color }}>
             Étape {ram.id}
           </div>
           <h2 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">{ram.title}</h2>
         </div>
 
-        {/* 3 columns */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          <div className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 p-5">
-            <div className="flex items-center gap-2 mb-3">
-              <Leaf className="w-5 h-5 text-green-400" />
-              <span className="text-sm font-bold text-green-400 uppercase tracking-wide">Environnemental</span>
+        {/* 2×2 impact grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+          <div className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <Leaf className="w-4 h-4 text-green-400" />
+              <span className="text-xs font-bold text-green-400 uppercase tracking-wide">Environnemental</span>
             </div>
-            <p className="text-white/90 text-sm leading-relaxed mb-2">{ram.env.text}</p>
+            <p className="text-white/90 text-sm leading-relaxed mb-1">{ram.env.text}</p>
             <p className="text-white/50 text-xs italic">{ram.env.ex}</p>
           </div>
-          <div className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 p-5">
-            <div className="flex items-center gap-2 mb-3">
-              <Users className="w-5 h-5 text-blue-400" />
-              <span className="text-sm font-bold text-blue-400 uppercase tracking-wide">Social</span>
+          <div className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <Users className="w-4 h-4 text-blue-400" />
+              <span className="text-xs font-bold text-blue-400 uppercase tracking-wide">Social</span>
             </div>
-            <p className="text-white/90 text-sm leading-relaxed mb-2">{ram.social.text}</p>
+            <p className="text-white/90 text-sm leading-relaxed mb-1">{ram.social.text}</p>
             <p className="text-white/50 text-xs italic">{ram.social.ex}</p>
           </div>
-          <div className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 p-5">
-            <div className="flex items-center gap-2 mb-3">
-              <Coins className="w-5 h-5 text-amber-400" />
-              <span className="text-sm font-bold text-amber-400 uppercase tracking-wide">Économique</span>
+          <div className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <Coins className="w-4 h-4 text-amber-400" />
+              <span className="text-xs font-bold text-amber-400 uppercase tracking-wide">Économique</span>
             </div>
-            <p className="text-white/90 text-sm leading-relaxed mb-2">{ram.eco.text}</p>
+            <p className="text-white/90 text-sm leading-relaxed mb-1">{ram.eco.text}</p>
             <p className="text-white/50 text-xs italic">{ram.eco.ex}</p>
+          </div>
+          <div className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <MapPin className="w-4 h-4 text-orange-400" />
+              <span className="text-xs font-bold text-orange-400 uppercase tracking-wide">Géographie locale</span>
+            </div>
+            <p className="text-white/90 text-sm leading-relaxed mb-1">{ram.geo.text}</p>
+            <p className="text-white/50 text-xs italic">{ram.geo.ex}</p>
           </div>
         </div>
 
         {/* KPIs row */}
-        <div className="flex flex-wrap justify-center gap-4">
+        <div className="flex flex-wrap justify-center gap-3">
           {ram.kpis.map((kpi, i) => (
-            <div key={i} className="rounded-xl bg-white/10 backdrop-blur-md border border-white/15 px-6 py-3 text-center">
-              <div className="text-2xl font-extrabold text-white">{kpi.value}</div>
+            <div key={i} className="rounded-xl bg-white/10 backdrop-blur-md border border-white/15 px-5 py-2.5 text-center min-w-[140px]">
+              <div className="flex items-center justify-center gap-1.5 mb-1">
+                <span className={`w-2 h-2 rounded-full ${catColors[kpi.cat]}`} />
+                <span className="text-[10px] font-bold text-white/40 uppercase">{kpi.cat}</span>
+              </div>
+              <div className="text-xl font-extrabold text-white">{kpi.value}</div>
               <div className="text-xs text-white/60 mt-0.5">{kpi.label}</div>
-              <div className="text-[10px] text-white/30 mt-1 italic">{kpi.src}</div>
+              <div className="text-[10px] text-white/40 mt-1 italic leading-tight">{kpi.impact}</div>
+              <div className="text-[9px] text-white/25 mt-1">
+                {sourceUrls[kpi.src] ? (
+                  <a href={sourceUrls[kpi.src]} target="_blank" rel="noopener noreferrer" className="hover:text-white/40 hover:underline transition-colors">{kpi.src}</a>
+                ) : kpi.src}
+              </div>
             </div>
           ))}
         </div>
@@ -286,6 +388,7 @@ function StepSlide({ ram }: { ram: typeof ramifications[0] }) {
 
 export default function Presentation() {
   const [current, setCurrent] = useState(0);
+  const [printMode, setPrintMode] = useState(false);
 
   const goNext = useCallback(() => setCurrent((p) => Math.min(p + 1, TOTAL_SLIDES - 1)), []);
   const goPrev = useCallback(() => setCurrent((p) => Math.max(p - 1, 0)), []);
@@ -298,6 +401,18 @@ export default function Presentation() {
     window.addEventListener("keydown", handle);
     return () => window.removeEventListener("keydown", handle);
   }, [goNext, goPrev]);
+
+  useEffect(() => {
+    if (printMode) {
+      const timer = setTimeout(() => window.print(), 600);
+      const onAfterPrint = () => setPrintMode(false);
+      window.addEventListener("afterprint", onAfterPrint);
+      return () => {
+        clearTimeout(timer);
+        window.removeEventListener("afterprint", onAfterPrint);
+      };
+    }
+  }, [printMode]);
 
   const slides = [
     /* ═══ 0 — Title ═══ */
@@ -331,17 +446,17 @@ export default function Presentation() {
         <div className="rounded-2xl bg-white/5 border border-white/10 p-8 backdrop-blur-sm text-center">
           <div className="text-5xl font-black text-red-400 mb-2">62Mt</div>
           <div className="text-sm text-white/70">de e-waste générés par an dans le monde</div>
-          <div className="text-[10px] text-white/30 mt-2 italic">Global E-waste Monitor, UNITAR/ITU 2024</div>
+          <a href="https://ewastemonitor.info/the-global-e-waste-monitor-2024/" target="_blank" rel="noopener noreferrer" className="text-[10px] text-white/30 mt-2 italic hover:text-white/50 hover:underline transition-colors block">Global E-waste Monitor, UNITAR/ITU 2024</a>
         </div>
         <div className="rounded-2xl bg-white/5 border border-white/10 p-8 backdrop-blur-sm text-center">
           <div className="text-5xl font-black text-red-400 mb-2">91%</div>
           <div className="text-sm text-white/70">du plastique n&apos;est jamais recyclé</div>
-          <div className="text-[10px] text-white/30 mt-2 italic">OECD Global Plastics Outlook 2022</div>
+          <a href="https://www.oecd.org/en/publications/2022/02/global-plastics-outlook_a653d1c9.html" target="_blank" rel="noopener noreferrer" className="text-[10px] text-white/30 mt-2 italic hover:text-white/50 hover:underline transition-colors block">OECD Global Plastics Outlook 2022</a>
         </div>
         <div className="rounded-2xl bg-white/5 border border-white/10 p-8 backdrop-blur-sm text-center">
           <div className="text-5xl font-black text-red-400 mb-2">40K</div>
           <div className="text-sm text-white/70">enfants dans les mines de cobalt (RDC)</div>
-          <div className="text-[10px] text-white/30 mt-2 italic">UNICEF 2014, Amnesty International 2016</div>
+          <div className="text-[10px] text-white/30 mt-2 italic"><a href="https://www.unicef.org/drcongo/en/topics/child-labour" target="_blank" rel="noopener noreferrer" className="hover:text-white/50 hover:underline transition-colors">UNICEF 2014</a>, <a href="https://www.amnesty.org/en/documents/afr62/3183/2016/en/" target="_blank" rel="noopener noreferrer" className="hover:text-white/50 hover:underline transition-colors">Amnesty International 2016</a></div>
         </div>
       </div>
       <p className="text-white/50 text-sm mt-8 max-w-2xl">
@@ -412,9 +527,9 @@ export default function Presentation() {
         </div>
         <h2 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">Effets Systémiques Croisés</h2>
         <p className="text-gray-400 mb-12">Comment les impacts se propagent à travers les systèmes</p>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {systemicEffects.map((effect, i) => (
-            <div key={i} className="rounded-2xl bg-white/5 border border-white/10 p-6 backdrop-blur-sm text-left">
+            <div key={i} className="rounded-2xl bg-white/5 border border-white/10 p-5 backdrop-blur-sm text-left">
               <h4 className="text-green-400 font-bold text-base mb-5">{effect.title}</h4>
               <div className="space-y-3">
                 {effect.steps.map((step, j) => (
@@ -443,19 +558,19 @@ export default function Presentation() {
         </h2>
         <div className="grid sm:grid-cols-3 gap-6 mb-12">
           <div className="rounded-2xl border border-gray-200 p-8 text-center">
-            <div className="text-5xl font-black text-green-600 mb-2">~50</div>
-            <div className="text-sm text-gray-500 font-medium">KPIs quantifiés</div>
-            <div className="text-xs text-gray-400 mt-1">Environnement, Social, Économie</div>
+            <div className="text-5xl font-black text-green-600 mb-2">32</div>
+            <div className="text-sm text-gray-500 font-medium">KPIs quantifiés avec impact</div>
+            <div className="text-xs text-gray-400 mt-1">Chaque indicateur → conséquence chiffrée</div>
           </div>
           <div className="rounded-2xl border border-gray-200 p-8 text-center">
-            <div className="text-5xl font-black text-green-600 mb-2">8</div>
-            <div className="text-sm text-gray-500 font-medium">Étapes du cycle évaluées</div>
-            <div className="text-xs text-gray-400 mt-1">Extraction → Fin de vie</div>
+            <div className="text-5xl font-black text-green-600 mb-2">8 × 4</div>
+            <div className="text-sm text-gray-500 font-medium">Étapes × Dimensions d&apos;impact</div>
+            <div className="text-xs text-gray-400 mt-1">ENV · SOC · ÉCO · GÉO</div>
           </div>
           <div className="rounded-2xl border border-gray-200 p-8 text-center">
-            <div className="text-5xl font-black text-green-600 mb-2">ESG</div>
-            <div className="text-sm text-gray-500 font-medium">Cadre d&apos;évaluation</div>
-            <div className="text-xs text-gray-400 mt-1">Environmental, Social, Governance</div>
+            <div className="text-5xl font-black text-green-600 mb-2">ESG+</div>
+            <div className="text-sm text-gray-500 font-medium">Cadre élargi avec géographie</div>
+            <div className="text-xs text-gray-400 mt-1">Environmental, Social, Governance + Territorial</div>
           </div>
         </div>
         <div className="grid sm:grid-cols-2 gap-4 text-left max-w-3xl mx-auto">
@@ -477,30 +592,37 @@ export default function Presentation() {
         <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-10 text-center">Sources &amp; Références</h2>
         <div className="grid sm:grid-cols-2 gap-x-8 gap-y-2 text-sm">
           {[
-            { ref: "UNITAR/ITU", detail: "Global E-waste Monitor 2024 — 62Mt e-waste, 22.3% recyclés" },
-            { ref: "OECD", detail: "Global Plastics Outlook 2022 — 91% plastique non recyclé" },
-            { ref: "UNICEF", detail: "Rapport travail des enfants RDC 2014 — ~40 000 enfants dans les mines" },
-            { ref: "Amnesty International", detail: "\"This is what we die for\" 2016 — cobalt supply chain" },
-            { ref: "ADEME", detail: "Base Carbone 2023 — facteurs d'émission transport, durée de vie produits" },
-            { ref: "Clean Clothes Campaign", detail: "Salaires textiles Bangladesh 2023 — 0.32$/h, seuil décent 0.75$/h" },
-            { ref: "ILO / Better Work", detail: "Conditions de travail usines textiles, heures supplémentaires" },
-            { ref: "Oxfam", detail: "\"What She Makes\" 2017 — 2-4% du prix retail va à l'ouvrier" },
-            { ref: "Commission Européenne", detail: "Screening environmental claims 2021 — 53.3% greenwashing" },
-            { ref: "DS Smith", detail: "Packaging survey 2020 — 40% volume vide, 62% frustration consommateurs" },
-            { ref: "Procos", detail: "Vacance commerciale France 2023 — ~11 000 fermetures/an" },
-            { ref: "eMarketer", detail: "Global e-commerce market share 2023 — top 5 = ~63%" },
-            { ref: "DARES", detail: "Statut livreurs plateformes France 2022 — ~75% auto-entrepreneurs" },
-            { ref: "KPMG", detail: "E-commerce returns 2023 — 30-50% retours en mode" },
-            { ref: "ITF", detail: "International Transport Workers' Federation — 400 000 marins bloqués (COVID 2020)" },
-            { ref: "Quinet", detail: "Commission Quinet 2019 — valeur tutélaire du carbone : 100€/tCO₂" },
-            { ref: "IEA", detail: "International Energy Agency 2023 — émissions extraction cuivre : ~2 500 kg CO₂e/t" },
-            { ref: "LME", detail: "London Metal Exchange — cours du cobalt 2018-2023, variation ±70%" },
-            { ref: "HOP", detail: "Halte à l'Obsolescence Programmée 2023 — indice réparabilité moyen 6.2/10" },
-            { ref: "IUCN", detail: "Primary microplastics in the oceans 2017 — 500 000 t/an (textile)" },
-            { ref: "UNEP", detail: "Recyclable metals value 2019 — valeur matière perdue ~57 Mrd$/an" },
+            { ref: "UNITAR/ITU", detail: "Global E-waste Monitor 2024 — 62Mt e-waste, 22.3% recyclés", url: "https://ewastemonitor.info/the-global-e-waste-monitor-2024/" },
+            { ref: "OECD", detail: "Global Plastics Outlook 2022 — 91% plastique non recyclé", url: "https://www.oecd.org/en/publications/2022/02/global-plastics-outlook_a653d1c9.html" },
+            { ref: "UNICEF", detail: "Rapport travail des enfants RDC 2014 — ~40 000 enfants dans les mines", url: "https://www.unicef.org/drcongo/en/topics/child-labour" },
+            { ref: "Amnesty International", detail: "\"This is what we die for\" 2016 — cobalt supply chain", url: "https://www.amnesty.org/en/documents/afr62/3183/2016/en/" },
+            { ref: "ADEME", detail: "Base Carbone 2023 — facteurs d'émission transport, durée de vie produits", url: "https://base-empreinte.ademe.fr/" },
+            { ref: "Clean Clothes Campaign", detail: "Salaires textiles Bangladesh 2023 — 0.32$/h, seuil décent 0.75$/h", url: "https://cleanclothes.org/campaigns/bmwc" },
+            { ref: "ILO / Better Work", detail: "Conditions de travail usines textiles, heures supplémentaires", url: "https://betterwork.org/reports-and-publications/" },
+            { ref: "Oxfam", detail: "\"What She Makes\" 2017 — 2-4% du prix retail va à l'ouvrier", url: "https://www.oxfam.org.au/what-she-makes/" },
+            { ref: "Commission Européenne", detail: "Screening environmental claims 2021 — 53.3% greenwashing", url: "https://ec.europa.eu/commission/presscorner/detail/en/ip_21_269" },
+            { ref: "DS Smith", detail: "Packaging survey 2020 — 40% volume vide, 62% frustration consommateurs", url: "https://www.dssmith.com/EmptySpaceEnglish" },
+            { ref: "Procos", detail: "Vacance commerciale France 2023 — ~11 000 fermetures/an", url: "https://www.procos.org/" },
+            { ref: "eMarketer", detail: "Global e-commerce market share 2023 — top 5 = ~63%", url: "https://www.insiderintelligence.com/" },
+            { ref: "DARES", detail: "Statut livreurs plateformes France 2022 — ~75% auto-entrepreneurs", url: "https://dares.travail-emploi.gouv.fr/publication/les-travailleurs-de-plateforme-quels-profils-et-quelles-conditions-de-travail" },
+            { ref: "KPMG", detail: "E-commerce returns 2023 — 30-50% retours en mode", url: "https://assets.kpmg.com/content/dam/kpmg/ie/pdf/2021/05/ie-front-row-seeing-fashions-future.pdf" },
+            { ref: "ITF", detail: "International Transport Workers' Federation — 400 000 marins bloqués (COVID 2020)", url: "https://www.itfglobal.org/en/news/crew-change-crisis-risks-becoming-forced-labour-epidemic-tragedy-hits-six-month-mark-world" },
+            { ref: "Quinet", detail: "Commission Quinet 2019 — valeur tutélaire du carbone : 100€/tCO₂", url: "https://www.strategie.gouv.fr/sites/strategie.gouv.fr/files/atoms/files/dp-valeur-action-pour-climat-fevrier-2019.pdf" },
+            { ref: "IEA", detail: "International Energy Agency 2023 — émissions extraction cuivre : ~2 500 kg CO₂e/t", url: "https://www.iea.org/reports/energy-technology-perspectives-2023" },
+            { ref: "LME", detail: "London Metal Exchange — cours du cobalt 2018-2023, variation ±70%", url: "https://www.lme.com/metals/ev/lme-cobalt" },
+            { ref: "HOP", detail: "Halte à l'Obsolescence Programmée 2023 — indice réparabilité moyen 6.2/10", url: "https://www.halteobsolescence.org/lindice-de-reparabilite-tient-il-ses-promesses/" },
+            { ref: "IUCN", detail: "Primary microplastics in the oceans 2017 — 500 000 t/an (textile)", url: "https://portals.iucn.org/library/node/46622" },
+            { ref: "UNEP", detail: "Recyclable metals value 2019 — valeur matière perdue ~57 Mrd$/an", url: "https://ewastemonitor.info/gem-2020/" },
+            { ref: "UNEP", detail: "Marine litter & plastic pollution 2021 — 11Mt plastique/an dans les océans", url: "https://www.unep.org/resources/pollution-solution-global-assessment-marine-litter-and-plastic-pollution" },
+            { ref: "Banque Mondiale", detail: "Pollution industrielle eau 2019 — 20% due au textile", url: "https://www.worldbank.org/en/news/feature/2019/09/23/costo-de-la-contaminacion-de-la-industria-textil" },
+            { ref: "IMO", detail: "Réglementation soufre maritime 2020 — 13% SO₂ mondial", url: "https://www.imo.org/en/MediaCentre/HotTopics/Pages/Sulphur-2020.aspx" },
+            { ref: "Google", detail: "Environmental Report 2024 — 21 Mrd L d'eau pour data centers", url: "https://sustainability.google/reports/google-2024-environmental-report/" },
+            { ref: "WEF", detail: "Future of Last-Mile Ecosystem 2020 — +30% congestion urbaine", url: "https://www.weforum.org/reports/the-future-of-the-last-mile-ecosystem/" },
+            { ref: "Eurostat", detail: "Déchets municipaux 2022 — 580 kg/habitant/an en France", url: "https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Municipal_waste_statistics" },
+            { ref: "Basel Action Network", detail: "Export e-waste vers l'Afrique 2021 — ~1Mt/an", url: "https://www.ban.org/news/2021/1/7/ban-report-export-of-e-waste" },
           ].map((s, i) => (
             <div key={i} className="flex items-start gap-2 py-1.5 border-b border-white/5">
-              <span className="text-green-400 font-bold shrink-0 w-44 text-right">{s.ref}</span>
+              <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-green-400 font-bold shrink-0 w-44 text-right hover:text-green-300 hover:underline transition-colors">{s.ref}</a>
               <span className="text-white/60">{s.detail}</span>
             </div>
           ))}
@@ -534,6 +656,22 @@ export default function Presentation() {
     </ImageSlide>,
   ];
 
+  // Slides with light backgrounds where nav must use dark colors
+  const isLight = [2, 3, 13].includes(current);
+
+  /* ── Print mode: render all slides stacked with page breaks ── */
+  if (printMode) {
+    return (
+      <div className="print-container bg-black">
+        {slides.map((slide, i) => (
+          <div key={i} className="print-slide-page">
+            {slide}
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className="h-screen w-full overflow-hidden bg-black relative">
       <AnimatePresence mode="wait">
@@ -549,11 +687,28 @@ export default function Presentation() {
         </motion.div>
       </AnimatePresence>
 
+      {/* PDF export button */}
+      <button
+        onClick={() => setPrintMode(true)}
+        className={`fixed top-4 left-4 z-50 w-9 h-9 rounded-full backdrop-blur-md flex items-center justify-center transition-all cursor-pointer ${
+          isLight
+            ? "bg-gray-900/10 hover:bg-gray-900/20 border border-gray-900/10 text-gray-900"
+            : "bg-white/10 hover:bg-white/20 border border-white/10 text-white"
+        }`}
+        title="Exporter en PDF"
+      >
+        <Download className="w-4 h-4" />
+      </button>
+
       {/* Navigation arrows */}
       {current > 0 && (
         <button
           onClick={goPrev}
-          className="fixed left-4 top-1/2 -translate-y-1/2 z-50 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/10 flex items-center justify-center text-white transition-all cursor-pointer"
+          className={`fixed left-4 top-1/2 -translate-y-1/2 z-50 w-10 h-10 rounded-full backdrop-blur-md flex items-center justify-center transition-all cursor-pointer ${
+            isLight
+              ? "bg-gray-900/10 hover:bg-gray-900/20 border border-gray-900/10 text-gray-900"
+              : "bg-white/10 hover:bg-white/20 border border-white/10 text-white"
+          }`}
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
@@ -561,7 +716,11 @@ export default function Presentation() {
       {current < TOTAL_SLIDES - 1 && (
         <button
           onClick={goNext}
-          className="fixed right-4 top-1/2 -translate-y-1/2 z-50 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/10 flex items-center justify-center text-white transition-all cursor-pointer"
+          className={`fixed right-4 top-1/2 -translate-y-1/2 z-50 w-10 h-10 rounded-full backdrop-blur-md flex items-center justify-center transition-all cursor-pointer ${
+            isLight
+              ? "bg-gray-900/10 hover:bg-gray-900/20 border border-gray-900/10 text-gray-900"
+              : "bg-white/10 hover:bg-white/20 border border-white/10 text-white"
+          }`}
         >
           <ChevronRight className="w-5 h-5" />
         </button>
@@ -575,12 +734,14 @@ export default function Presentation() {
               key={i}
               onClick={() => setCurrent(i)}
               className={`rounded-full transition-all cursor-pointer ${
-                i === current ? "w-6 h-2 bg-white" : "w-2 h-2 bg-white/30 hover:bg-white/50"
+                i === current
+                  ? `w-6 h-2 ${isLight ? "bg-gray-900" : "bg-white"}`
+                  : `w-2 h-2 ${isLight ? "bg-gray-900/30 hover:bg-gray-900/50" : "bg-white/30 hover:bg-white/50"}`
               }`}
             />
           ))}
         </div>
-        <span className="text-white/40 text-xs font-mono ml-2">
+        <span className={`text-xs font-mono ml-2 ${isLight ? "text-gray-900/40" : "text-white/40"}`}>
           {current + 1} / {TOTAL_SLIDES}
         </span>
       </div>
